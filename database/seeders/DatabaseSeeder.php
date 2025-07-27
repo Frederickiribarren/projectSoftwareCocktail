@@ -5,7 +5,14 @@ namespace Database\Seeders;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-
+use DataBase\seeder\ingredientsSeeder;
+use DataBase\seeder\inventoriesSeeder;
+use DataBase\seeder\ocr_jobsSeeder;
+use DataBase\seeder\repice_ingredientsSeeder;
+use DataBase\seeder\repiceSeeder;
+use DataBase\seeder\user_favoritesSeeder;
+use DataBase\seeder\user_repice_notesSeeder;
+use DataBase\seeder\usersSeeder;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -13,11 +20,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $this-> call([
+            ingredientsSeeder::class,
+            inventoriesSeeder::class,
+            usersSeeder::class,
+            recipeSeeder::class,
+            recipe_ingredientsSeeder::class,
+            ocr_jobsSeeder::class,
+            user_repice_notesSeeder::class,
+            user_favoritesSeeder::class,
         ]);
     }
+    // para ejecutar los seeders completos comando php artisan db:seed
+    // para ejecutar un seeder en especifico comando php artisan db:seed --class="Database\Seeders\NombreDelSeeder"
+    // para ejecutar un seeder en especifico con un nombre corto comando php artisan db:seed --class=NombreDelSeeder  
 }

@@ -32,7 +32,7 @@ class repiceFactory extends Factory
             'image_url' => $this->faker->imageUrl(),
             'user_id' => users::factory(),
             'source' => $this->faker->randomElement($source),
-            'is_private' => $this->faker->tinyint(1, 0),
+            'is_private' => $this->faker->numberBetween(0, 1),
             'source_api_id' => $this->faker->optional()->uuid(),
         ];
     }

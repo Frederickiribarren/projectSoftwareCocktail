@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\repice_ingredients;
 use App\Models\recipe;
 use App\Models\ingredients;
+
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\repice_ingredients>
  */
-class repice_ingredintsFactory extends Factory
+class repice_ingredientsFactory extends Factory
 {
     /**
      * Define the model's default state.

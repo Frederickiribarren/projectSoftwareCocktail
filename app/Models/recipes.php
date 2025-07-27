@@ -9,7 +9,7 @@ class recipes extends Model
 {
     use HasFactory;
     
-    protected $fiallable =[
+    protected $fillable =[
         'name',
         'instructions',
         'glass_type',
@@ -19,6 +19,6 @@ class recipes extends Model
         'source',
         'is_private',
         'source_api_id',
-    ]
+    ];
 
 }

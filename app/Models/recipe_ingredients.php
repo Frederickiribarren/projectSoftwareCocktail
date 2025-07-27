@@ -14,5 +14,5 @@ class recipe_ingredients extends Model
         'ingredient_id',
         'amount',
         'unit',
-    ]
+    ];
 }

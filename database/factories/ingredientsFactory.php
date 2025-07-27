@@ -17,12 +17,14 @@ class ingredientsFactory extends Factory
     protected $model = ingredients::class;
     public function definition(): array
     {
+        // Obtener un ID de ingrediente existente o null
+        $parentIngredientId = ingredients::inRandomOrder()->first()?->id;
         return [
             'name' => $this->faker->unique()->word(),
             'description' => $this->faker->optional()->sentence(),
-            'is_alcohol' => $this->faker->tinyint(1, 0),
-            'parent_ingredient_id' => $this->faker->optional()->randomDigitNotNull(),
-            'flavor_profile_tags' => $this->faker->optional()->words(3, true),
+            'is_alcoholic' => $this->faker->numberBetween(0, 1),
+            'parent_ingredient_id' =>  $parentIngredientId,
+            'flavor_profile_tags' => json_encode($this->faker->optional()->words(3, true)),
             'source_api_id' => $this->faker->optional()->uuid(),
         ];
     }
