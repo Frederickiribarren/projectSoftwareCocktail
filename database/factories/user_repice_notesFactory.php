@@ -11,6 +11,7 @@ use App\Models\repices;
  */
 class user_repice_notesFactory extends Factory
 {
+    protected $model = user_repice_notes::class;
     /**
      * Define the model's default state.
      *
@@ -18,7 +19,7 @@ class user_repice_notesFactory extends Factory
      */
     public function definition(): array
     {
-        protected $model = user_repice_notes::class;
+        
         return [
             'user_id' => users::factory(),
             'repice_id' => repices::factory(),

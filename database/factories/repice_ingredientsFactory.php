@@ -17,9 +17,10 @@ class repice_ingredientsFactory extends Factory
      *
      * @return array<string, mixed>
      */
+     protected $model = repice_ingredients::class;
     public function definition(): array
     {
-        protected $model = repice_ingredients::class;
+       
         return [
             'recipe_id' => recipe::factory(),
             'ingredient_id' => ingredients::factory(),

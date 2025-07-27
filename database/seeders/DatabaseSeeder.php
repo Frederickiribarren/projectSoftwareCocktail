@@ -5,14 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use DataBase\seeder\ingredientsSeeder;
-use DataBase\seeder\inventoriesSeeder;
-use DataBase\seeder\ocr_jobsSeeder;
-use DataBase\seeder\repice_ingredientsSeeder;
-use DataBase\seeder\repiceSeeder;
-use DataBase\seeder\user_favoritesSeeder;
-use DataBase\seeder\user_repice_notesSeeder;
-use DataBase\seeder\usersSeeder;
+
 class DatabaseSeeder extends Seeder
 {
     /**

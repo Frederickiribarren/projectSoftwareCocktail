@@ -11,6 +11,7 @@ use App\Models\recipes;
  */
 class user_favoritesFactory extends Factory
 {
+    protected $model = user_favorites::class;
     /**
      * Define the model's default state.
      *
@@ -18,7 +19,7 @@ class user_favoritesFactory extends Factory
      */
     public function definition(): array
     {
-        protected $model = user_favorites::class;
+        
         return [
             'user_id' => users::factory(),
             'recipe_id' => recipes::factory(),
