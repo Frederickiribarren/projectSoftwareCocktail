@@ -1,0 +1,24 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+class recipes extends Model
+{
+    use HasFactory;
+    
+    protected $fiallable =[
+        'name',
+        'instructions',
+        'glass_type',
+        'garnish',
+        'image_url',
+        'user_id',
+        'source',
+        'is_private',
+        'source_api_id',
+    ]
+
+}
