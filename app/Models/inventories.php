@@ -12,5 +12,6 @@ class inventories extends Model
         'user_id',
         'ingredient_id',
         'in_stock',
+        'quantity_mi',
     ]
 }

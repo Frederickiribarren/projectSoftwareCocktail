@@ -12,5 +12,7 @@ class ocr_jobs extends Model
         'user_id',
         'status',
         'original_image_path',
+        'raw_result',
+        'error_message',
     ];
 }

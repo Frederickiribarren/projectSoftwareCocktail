@@ -3,7 +3,9 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-
+use App\Models\repice_ingredients;
+use App\Models\recipe;
+use App\Models\ingredients;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\repice_ingredients>
  */
@@ -16,8 +18,12 @@ class repice_ingredintsFactory extends Factory
      */
     public function definition(): array
     {
+        protected $model = repice_ingredients::class;
         return [
-            //
+            'recipe_id' => recipe::factory(),
+            'ingredient_id' => ingredients::factory(),
+            'amount' => $this->faker->randomFloat(2, 0, 100),
+            'unit' => $this->faker->randomElement(['ml', 'g', 'oz', 'cup']),
         ];
     }
 }

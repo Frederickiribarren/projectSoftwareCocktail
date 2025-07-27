@@ -3,7 +3,9 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-
+use App\Models\user_repice_notes;
+use App\Models\users;
+use App\Models\repices;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\user_repice_notes>
  */
@@ -16,8 +18,11 @@ class user_repice_notesFactory extends Factory
      */
     public function definition(): array
     {
+        protected $model = user_repice_notes::class;
         return [
-            //
+            'user_id' => users::factory(),
+            'repice_id' => repices::factory(),
+            'note' => $this->faker->sentence(),
         ];
     }
 }

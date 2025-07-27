@@ -13,5 +13,9 @@ class ingredients extends Model
         'name',
         'description',
         'is_alcoholic',
+        'parent_ingredient_id',
+        'flavor_profile_tags',
+        'source_api_id',
     ]
+
 }
