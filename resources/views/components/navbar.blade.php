@@ -1,5 +1,5 @@
 <style>
-        nav {
+        .top-navbar { 
             position: fixed; 
             top: 0;
             left: 0;
@@ -7,7 +7,9 @@
             z-index: 1000;
             background-color: var(--primary-color);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            height: var(--navbar-height);
         }
+
 
         .container-navbar {
             display: flex;
@@ -106,12 +108,12 @@
 
         </style>
 
-        <nav>
+        <nav class="top-navbar">
         <div class="container-navbar">
             <div class="logo"></div>
             <div>
                 <ul class="nav-links">
-                    <li><a href="">Inicio</a></li>
+                    <li><a href="{{ route('inicio') }}">Inicio</a></li>
                     <li class="dropdown">
                         <a href="">Recetas</a>
                         <div class="dropdown-content">
@@ -130,6 +132,7 @@
                         </div>
                     </li>
                     <li><a href="">Contacto</a></li>
+                    <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
                 </ul>
             </div>
             <div>
