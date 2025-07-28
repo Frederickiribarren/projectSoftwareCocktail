@@ -16,11 +16,11 @@ class DatabaseSeeder extends Seeder
         $this-> call([
             ingredientsSeeder::class,
             inventoriesSeeder::class,
-            usersSeeder::class,
+            userSeeder::class,
             recipeSeeder::class,
             recipe_ingredientsSeeder::class,
             ocr_jobsSeeder::class,
-            user_repice_notesSeeder::class,
+            user_recipe_notesSeeder::class,
             user_favoritesSeeder::class,
         ]);
     }

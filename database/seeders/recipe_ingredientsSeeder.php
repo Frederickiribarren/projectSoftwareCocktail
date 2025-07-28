@@ -4,16 +4,16 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\user_repice_notes;
-use database\factories\user_repice_notesFactory;
+use App\Models\recipe_ingredients;
+use database\factories\recipe_ingredientsFactory;
 
-class user_repice_notesSeeder extends Seeder
+class recipe_ingredientsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        user_repice_notes::factory()->count(10)->create();
+        recipe_ingredients::factory()->count(10)->create();
     }
 }

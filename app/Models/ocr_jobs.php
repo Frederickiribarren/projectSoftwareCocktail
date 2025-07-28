@@ -9,6 +9,7 @@ class ocr_jobs extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'id',
         'user_id',
         'status',
         'original_image_path',

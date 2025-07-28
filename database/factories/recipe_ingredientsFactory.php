@@ -3,21 +3,21 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\repice_ingredients;
+use App\Models\recipe_ingredients;
 use App\Models\recipe;
 use App\Models\ingredients;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\repice_ingredients>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\recipe_ingredients>
  */
-class repice_ingredientsFactory extends Factory
+class recipe_ingredientsFactory extends Factory
 {
     /**
      * Define the model's default state.
      *
      * @return array<string, mixed>
      */
-     protected $model = repice_ingredients::class;
+     protected $model = recipe_ingredients::class;
     public function definition(): array
     {
        

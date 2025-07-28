@@ -9,10 +9,11 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+    
+
     public function up(): void
     {
         Schema::disableForeignKeyConstraints();
-
         Schema::create('recipe_ingredients', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('recipe_id')->index();

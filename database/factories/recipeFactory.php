@@ -3,10 +3,10 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\recipes;
+use App\Models\recipe;
 use App\Models\User;
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\repice>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\recipe>
  */
 class recipeFactory extends Factory
 {
@@ -15,7 +15,7 @@ class recipeFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    protected $model = recipes::class;
+    protected $model = recipe::class;
     public function definition(): array
     {
         

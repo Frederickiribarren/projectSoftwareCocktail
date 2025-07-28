@@ -15,4 +15,5 @@ class recipe_ingredients extends Model
         'amount',
         'unit',
     ];
+    public $timestamps = false;
 }

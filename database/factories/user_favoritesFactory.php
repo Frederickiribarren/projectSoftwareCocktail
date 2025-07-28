@@ -4,8 +4,8 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\user_favorites;
-use App\Models\users;
-use App\Models\recipes;
+use App\Models\user;
+use App\Models\recipe;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\user_favorites>
  */
@@ -21,8 +21,8 @@ class user_favoritesFactory extends Factory
     {
         
         return [
-            'user_id' => users::factory(),
-            'recipe_id' => recipes::factory(),
+            'user_id' => User::factory(),
+            'recipe_id' => Recipe::factory(),
         ];
     }
 }
