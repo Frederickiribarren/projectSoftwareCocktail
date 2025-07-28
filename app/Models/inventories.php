@@ -8,9 +8,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class inventories extends Model
 {
     use HasFactory;
-    protected $fiallable = [
+    protected $fillable = [
         'user_id',
         'ingredient_id',
         'in_stock',
-    ]
+        'quantity_mi',
+    ];
 }

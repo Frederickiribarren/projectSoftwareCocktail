@@ -13,11 +13,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $this-> call([
+            ingredientsSeeder::class,
+            inventoriesSeeder::class,
+            userSeeder::class,
+            recipeSeeder::class,
+            recipe_ingredientsSeeder::class,
+            ocr_jobsSeeder::class,
+            user_recipe_notesSeeder::class,
+            user_favoritesSeeder::class,
         ]);
     }
+    // para ejecutar los seeders completos comando php artisan db:seed
+    // para ejecutar un seeder en especifico comando php artisan db:seed --class="Database\Seeders\NombreDelSeeder"
+    // para ejecutar un seeder en especifico con un nombre corto comando php artisan db:seed --class=NombreDelSeeder  
 }

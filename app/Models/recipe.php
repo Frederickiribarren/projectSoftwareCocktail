@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class recipes extends Model
+class recipe extends Model
 {
     use HasFactory;
     
-    protected $fiallable =[
+    protected $fillable =[
         'name',
         'instructions',
         'glass_type',
@@ -19,6 +19,6 @@ class recipes extends Model
         'source',
         'is_private',
         'source_api_id',
-    ]
+    ];
 
 }
