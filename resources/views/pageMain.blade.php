@@ -40,6 +40,6 @@
    @include('components.separador')
 
 
-   
+   @include('components.footer')
 </body>
 </html>
