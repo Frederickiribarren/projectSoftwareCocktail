@@ -28,7 +28,7 @@
         .logo {
             width: 50px;
             height: 50px;
-            background-image: url({{ asset('img/logo2.png') }});
+            background-image: url({{ asset('img/logoST.png') }});
             background-repeat: no-repeat;
             background-size: cover;
             background-position: center center;
