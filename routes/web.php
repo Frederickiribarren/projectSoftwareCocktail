@@ -14,7 +14,7 @@ Route::get('/dashboard', function () {
 
 
 Route::get('/login', function () {
-    return view('components.login');
+    return view('ingreso');
 })->name('login');
 
 
