@@ -182,7 +182,7 @@
     .footer-logo {
         width: 64px;
         height: 64px;
-        background-image: url({{ asset('img/logoST.png') }});
+        background-image: url({{ asset('img/logoST1.png') }});
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center center;
