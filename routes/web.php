@@ -17,3 +17,7 @@ Route::get('/login', function () {
     return view('components.login');
 })->name('login');
 
+
+Route::get('/recipes', function () {
+    return view('recipes');
+})->name('recipes');

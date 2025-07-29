@@ -1,0 +1,203 @@
+/* resources/css/recipes.css */
+
+/* Variables de Color (Puedes reutilizar las de tu dashboard.css o definirlas aquí) */
+:root {
+    --primary-bg-color: #1a1a1a; /* Negro muy oscuro */
+    --secondary-bg-color: #2b2b2b; /* Negro un poco más claro para elementos */
+    --text-color: #f0f0f0; /* Texto claro */
+    --accent-gold: #ffd700; /* Dorado principal */
+    --hover-gold: #f0c400; /* Dorado para hover */
+    --card-border-color: #3a3a3a; /* Borde sutil para tarjetas */
+    --link-color: #b8860b; /* Dorado para enlaces */
+}
+
+/* Base global */
+body {
+    font-family: 'Poppins', sans-serif; /* Consistente con tu dashboard */
+    background-color: var(--primary-bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif; /* Si lo usas para títulos */
+    color: var(--accent-gold);
+}
+
+a {
+    color: var(--link-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--hover-gold);
+}
+
+/* Contenedor principal de la página */
+.page-container {
+    display: flex; /* Para layout principal, si tuvieras sidebar */
+    min-height: 100vh;
+    padding-top: 60px; /* Espacio para el navbar fijo, ajusta según tu navbar */
+}
+
+/* Contenido principal de recetas */
+.main-content-recipes {
+    flex-grow: 1; /* Para que ocupe el espacio restante */
+    padding: 2rem;
+    max-width: 1200px; /* Limita el ancho del contenido */
+    margin: 0 auto; /* Centra el contenido */
+    box-sizing: border-box; /* Incluye padding en el tamaño total */
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 1rem 0;
+}
+
+.page-title {
+    font-size: 2.8rem;
+    margin-bottom: 0.5rem;
+    color: var(--accent-gold);
+}
+
+.page-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    opacity: 0.8;
+}
+
+/* Sección de Búsqueda */
+.search-section {
+    margin-bottom: 3rem;
+    display: flex;
+    justify-content: center;
+}
+
+.search-bar {
+    display: flex;
+    width: 100%;
+    max-width: 600px;
+    border: 2px solid var(--accent-gold);
+    border-radius: 50px; /* Bordes redondeados como en tu ejemplo */
+    overflow: hidden;
+    background-color: var(--secondary-bg-color);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.search-input {
+    flex-grow: 1;
+    padding: 1rem 1.5rem;
+    border: none;
+    background-color: transparent;
+    color: var(--text-color);
+    font-size: 1.1rem;
+    outline: none;
+}
+
+.search-input::placeholder {
+    color: var(--text-color);
+    opacity: 0.6;
+}
+
+.search-button {
+    background-color: var(--accent-gold);
+    color: var(--primary-bg-color); /* Texto oscuro en botón dorado */
+    border: none;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+    background-color: var(--hover-gold);
+}
+
+/* Galería de Cócteles */
+.cocktail-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Columnas responsivas */
+    gap: 2rem; /* Espacio entre tarjetas */
+    padding: 1rem;
+}
+
+.cocktail-card {
+    background-color: var(--secondary-bg-color);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--card-border-color); /* Borde sutil */
+}
+
+.cocktail-card:hover {
+    transform: translateY(-5px); /* Pequeño efecto hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+}
+
+.card-image {
+    width: 100%;
+    height: 200px; /* Altura fija para las imágenes */
+    object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse */
+    display: block;
+}
+
+.card-info {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 180px; /* Altura mínima para el cuerpo de la tarjeta */
+}
+
+.card-title {
+    font-size: 1.8rem;
+    margin-top: 0;
+    margin-bottom: 0.8rem;
+    color: var(--accent-gold);
+}
+
+.card-description {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 1.2rem;
+    opacity: 0.9;
+}
+
+.card-link {
+    display: inline-block;
+    background-color: var(--accent-gold);
+    color: var(--primary-bg-color);
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin-top: auto; /* Empuja el enlace hacia abajo */
+}
+
+.card-link:hover {
+    background-color: var(--hover-gold);
+    color: var(--primary-bg-color);
+}
+
+/* Media Queries para Responsividad */
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 2.2rem;
+    }
+    .main-content-recipes {
+        padding: 1.5rem;
+    }
+    .cocktail-gallery {
+        grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
+    }
+    .search-bar {
+        max-width: 100%;
+    }
+}

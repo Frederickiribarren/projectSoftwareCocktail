@@ -24,7 +24,7 @@
         .logo {
             width: 50px;
             height: 50px;
-            background-image: url({{ asset('img/cocktail-logo.png') }});
+            background-image: url({{ asset('img/logo2.png') }});
             background-repeat: no-repeat;
             background-size: cover;
             background-position: center center;
@@ -115,7 +115,7 @@
                 <ul class="nav-links">
                     <li><a href="{{ route('inicio') }}">Inicio</a></li>
                     <li class="dropdown">
-                        <a href="">Recetas</a>
+                        <a href="{{ route('recipes') }}">Recetas</a>
                         <div class="dropdown-content">
                             <a href="">Cócteles Clásicos</a>
                             <a href="">Cócteles Modernos</a>
