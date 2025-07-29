@@ -154,7 +154,7 @@
             </div>
             <div>
                 <ul class="nav-links">
-                    <li><a href="">Iniciar Sesión</a></li>
+                    <li><a href="{{ route('login') }}">Iniciar Sesión</a></li>
                     <li><a href="" class="cta-button">Registrarse</a></li>
                 </ul>
             </div>
