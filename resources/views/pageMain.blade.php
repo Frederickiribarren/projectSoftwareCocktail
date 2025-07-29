@@ -7,7 +7,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap');
         :root {
             --primary-color: #1a1a1a;
             --secondary-color: #ffffff;
@@ -23,11 +25,10 @@
             margin: 0;
             padding: 0;
             overflow-x: hidden;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Montserrat', sans-serif;
         }
 
         body {
-            padding-top: 10vh;
             background-color: #f9f9f9;
         }
 

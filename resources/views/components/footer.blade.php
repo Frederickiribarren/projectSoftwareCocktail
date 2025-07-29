@@ -337,8 +337,6 @@
                 <li><a href="">Biblioteca de Bar</a></li>
                 <li><a href="">Utensilios Profesionales</a></li>
                 <li><a href="">Ingredientes Premium</a></li>
-                <li><a href="">Cursos de Bartending</a></li>
-                <li><a href="">Blog de Mixología</a></li>
                 <li><a href="">Política de Privacidad</a></li>
                 <li><a href="">Términos y Condiciones</a></li>
             </ul>
@@ -362,7 +360,7 @@
     </div>
 
     <div class="footer-bottom">
-        <p>&copy; {{ date('Y') }} INFINITY INFUSIONS. Todos los derechos reservados. | Diseñado con ❤️ para los amantes de los cócteles</p>
+        <p>&copy; {{ date('Y') }} INFINITY INFUSIONS. Todos los derechos reservados. | Diseñado para proyecto de instituto </p>
         <p>El consumo de alcohol puede ser perjudicial para la salud. Disfruta con responsabilidad.</p>
     </div>
 </footer>

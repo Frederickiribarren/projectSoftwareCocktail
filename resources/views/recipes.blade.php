@@ -73,7 +73,7 @@
     </div>
     
     
-    @include('components.footer') 
+    @include('components.footer2') 
 
     
 </body>

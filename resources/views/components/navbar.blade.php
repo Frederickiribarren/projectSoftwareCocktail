@@ -1,13 +1,11 @@
 <style>
         .top-navbar { 
-            position: fixed; 
             top: 0;
             left: 0;
             width: 100%;
             z-index: 1000;
             background-color: var(--primary-color);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            height: var(--navbar-height);
         }
 
 
@@ -16,9 +14,15 @@
             justify-content: space-between;
             align-items: center;
             height: 10vh;
-            max-width: 1200px;
+            max-width: 1600px;
             margin: 0 auto;
             padding: 0 20px;
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 10px; 
         }
         
         .logo {
@@ -30,6 +34,16 @@
             background-position: center center;
             border-radius: 50%;
             border: 2px solid var(--accent-color);
+        }
+
+        .container-navbar p {
+            color: var(--accent-color);
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: 1px;
+            font-family: 'Poppins', sans-serif;
+            text-transform: uppercase;
         }
 
         .nav-links {
@@ -110,7 +124,10 @@
 
         <nav class="top-navbar">
         <div class="container-navbar">
-            <div class="logo"></div>
+            <div class="brand-container">
+                <div class="logo"></div>
+                <p>Infinity Infusions</p>
+            </div>
             <div>
                 <ul class="nav-links">
                     <li><a href="{{ route('inicio') }}">Inicio</a></li>
