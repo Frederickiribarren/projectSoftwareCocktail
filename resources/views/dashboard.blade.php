@@ -7,6 +7,15 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+    <style>
+        :root {
+            --primary-color: #1a1a1a;
+            --secondary-color: #ffffff;
+            --accent-color: #ffd700; /* Gold */
+            --hover-color: #f0c400;
+        }
+
+    </style>
 </head>
 <body>
     @include('components.navbar')
@@ -80,6 +89,6 @@
             </section>
         </main>
     </div>
-    
+    @include('components.footer2')
 </body>
 </html>
