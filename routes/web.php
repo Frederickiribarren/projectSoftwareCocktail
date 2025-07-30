@@ -21,3 +21,17 @@ Route::get('/login', function () {
 Route::get('/recipes', function () {
     return view('recipes');
 })->name('recipes');
+
+
+// estas deberian ser las vistas 
+ Route::get('/inventory', function () {
+    return view('inventory.index');
+})->name('inventory.index');
+
+Route::get('/recipes/create', function () {
+    return view('recipes.create');
+})->name('recipes.create');
+
+Route::get('/travel', function () {
+    return view('travel.index');
+})->name('travel.index');
