@@ -27,7 +27,11 @@
                 <h1 class="logo-text">Cocktail World</h1>
             </div>
             <nav class="sidebar-nav">
-                <a href="#" class="nav-link active">
+                <a href="{{ route('edit') }}" class="nav-link">
+                    <i class="fas fa-user"></i>
+                    <span>Perfil</span>
+                </a>
+                <a href="#" class="nav-link">
                     <i class="fas fa-tachometer-alt"></i>
                     <span>Dashboard</span>
                 </a>
@@ -35,7 +39,11 @@
                     <i class="fas fa-martini-glass-citrus"></i>
                     <span>Mis Recetas</span>
                 </a>
-                <a href="#" class="nav-link">
+                <a href="{{ route('travel') }}" class="nav-link">
+                    <i class="fas fa-plane"></i>
+                    <span>Modo Viaje</span>
+                </a>
+                <a href="{{ route('index') }}" class="nav-link">
                     <i class="fas fa-wine-bottle"></i>
                     <span>Mi Bar</span>
                 </a>
@@ -74,7 +82,7 @@
                     <div class="card-body">
                         <h3>Mi Bar</h3>
                         <p>Administra los ingredientes disponibles para ti.</p>
-                        <a href="#" class="card-link">Ir a Mi Bar &rarr;</a>
+                        <a href="{{ route('index') }}" class="card-link">Ir a Mi Bar &rarr;</a>
                     </div>
                 </div>
                  <div class="card">
@@ -84,7 +92,7 @@
                     <div class="card-body">
                         <h3>Nueva Receta</h3>
                         <p>Experimenta y crea nuevos tragos para añadir a tu coleccion</p>
-                        <a href="#" class="card-link">Crear Nueva Receta &rarr;</a>
+                        <a href="{{ route('create') }}" class="card-link">Crear Nueva Receta &rarr;</a>
                     </div>
                 </div>
             </section>

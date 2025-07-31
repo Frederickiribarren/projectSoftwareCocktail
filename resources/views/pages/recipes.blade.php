@@ -43,7 +43,7 @@
                     <div class="card-info">
                         <h3 class="card-title">Mojito Clásico</h3>
                         <p class="card-description">Un cóctel cubano refrescante, con ron, menta, lima y soda.</p>
-                        <a href="#" class="card-link">Ver Receta &rarr;</a>
+                        <a href="{{ route('show') }}" class="card-link">Ver Receta &rarr;</a>
                     </div>
                 </div>
 
@@ -53,7 +53,7 @@
                     <div class="card-info">
                         <h3 class="card-title">Margarita Tradicional</h3>
                         <p class="card-description">El icónico cóctel mexicano con tequila, licor de naranja y jugo de lima.</p>
-                        <a href="#" class="card-link">Ver Receta &rarr;</a>
+                        <a href="{{ route('show') }}" class="card-link">Ver Receta &rarr;</a>
                     </div>
                 </div>
 
@@ -63,7 +63,7 @@
                     <div class="card-info">
                         <h3 class="card-title">Michelada</h3>
                         <p class="card-description">Para los amantes de lo picante, la cerveza, el limon, salsas y sal.</p>
-                        <a href="#" class="card-link">Ver Receta &rarr;</a>
+                        <a href="{{ route('show') }}" class="card-link">Ver Receta &rarr;</a>
                     </div>
                 </div>
 
