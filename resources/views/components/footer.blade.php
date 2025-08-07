@@ -1,29 +1,13 @@
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-    
-    :root {
-        --primary-color: #1a1a1a;
-        --secondary-color: #ffffff;
-        --accent-color: #ffd700;
-        --accent-hover: #f0c400;
-        --text-primary: #ffffff;
-        --text-secondary: #cccccc;
-        --text-muted: #999999;
-        --background-dark: #0d0d0d;
-        --background-card: rgba(255, 255, 255, 0.03);
-        --border-color: rgba(255, 255, 255, 0.08);
-        --shadow-subtle: 0 2px 10px rgba(0, 0, 0, 0.1);
-        --shadow-elevated: 0 8px 25px rgba(0, 0, 0, 0.15);
-    }
-
     .footer {
-        background: linear-gradient(135deg, var(--primary-color) 0%, var(--background-dark) 100%);
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-color) 100%);
         color: var(--text-primary);
         padding: 60px 0 30px;
         margin-top: auto;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         position: relative;
         overflow: hidden;
+        font-family: var(--font-navbar-footer);
     }
 
     .footer::before {
@@ -54,6 +38,7 @@
         letter-spacing: 0.5px;
         position: relative;
         padding-bottom: 12px;
+        font-family: var(--font-h1-h2-h3);
     }
 
     .footer-section h3::after {
@@ -74,6 +59,7 @@
         line-height: 1.7;
         margin-bottom: 12px;
         font-weight: 400;
+        font-family: var(--font-p);
     }
 
     .footer-section ul {
@@ -91,6 +77,7 @@
         padding: 8px 0;
         font-weight: 400;
         position: relative;
+        font-family: var(--font-navbar-footer);
     }
 
     .footer-section ul li a::before {
@@ -168,12 +155,20 @@
         color: var(--text-muted);
         font-size: 13px;
         line-height: 1.6;
+        font-family: var(--font-p);
+    }
+
+    .footer-brand-title {
+        font-family: var(--font-logo) !important;
+        letter-spacing: 2px;
+        word-spacing: 6px;
+        color: var(--accent-color);
     }
 
     .footer-logo {
         width: 64px;
         height: 64px;
-        background-image: url({{ asset('img/logoST1.png') }});
+        background-image: url({{ asset('img/logo3.png') }});
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center center;
@@ -239,7 +234,7 @@
     }
 
     .newsletter button:hover {
-        background: var(--accent-hover);
+        background: var(--hover-color);
         transform: translateY(-1px);
         box-shadow: var(--shadow-elevated);
     }
@@ -305,7 +300,7 @@
         <!-- Sección Acerca de -->
         <div class="footer-section">
             <div class="footer-logo"></div>
-            <h3>INFINITY INFUSIONS</h3>
+            <h3 class="footer-brand-title">COCKTAIL WORLD</h3>
             <p>Tu destino definitivo para descubrir, aprender y crear los mejores cócteles. Desde recetas clásicas hasta creaciones modernas.</p>
             <div class="social-links">
                 <a href="#" title="Facebook"><i class='bx bxl-facebook'></i></a>

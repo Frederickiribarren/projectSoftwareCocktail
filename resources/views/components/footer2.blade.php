@@ -182,7 +182,7 @@
     .footer-logo {
         width: 64px;
         height: 64px;
-        background-image: url({{ asset('img/logoST1.png') }});
+        background-image: url({{ asset('img/logo3.png') }});
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center center;
@@ -266,7 +266,7 @@
         <!-- Sección Acerca de -->
         <div class="footer-section">
             <div class="footer-logo"></div>
-            <h3>INFINITY INFUSIONS</h3>
+            <h3>COCKTAIL WORLD</h3>
             <div class="social-links">
                 <a href="#" title="Facebook"><i class='bx bxl-facebook'></i></a>
                 <a href="#" title="Instagram"><i class='bx bxl-instagram'></i></a>

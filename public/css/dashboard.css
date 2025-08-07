@@ -1,47 +1,24 @@
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap');
+        /* Variables CSS importadas desde resetHtml.css */
 
-        :root {
-            
-            --gold: #d4af37;
-            --soft-gold: #e0c56e;
-            
-            --dark-gray: #2c2c2c;
-            --font-primary: 'Montserrat', sans-serif;
-            --font-secondary: 'Playfair Display', serif;
-            --primary-color: #1a1a1a; 
-            --secondary-color: #f5f5f5; 
-            --accent-color: #d4af37; 
-            --hover-color: #e0c56e; 
-        }
+body {
+    color: var(--text-primary);
+    font-family: var(--font-p);
+}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: #1a1a1a;
-            color: #f5f5f5;
-            
-        }
-
-        .dashboard-container {
+.dashboard-container {
             display: flex;
             min-height: 100vh; 
-            margin-top: 30px;
-            
+            margin-top: 10vh; /* Espacio para el navbar fijo */
         }
 
        
         .sidebar {
             width: 260px;
-            background-color: #111;
+            background-color: var(--primary-color);
             display: flex;
             flex-direction: column;
             padding: 1.5rem;
-            border-right: 1px solid var(--dark-gray);
+            border-right: 1px solid var(--border-color);
         }
 
         .sidebar-header {
@@ -50,18 +27,18 @@
             justify-content: center;
             margin-bottom: 2rem;
             padding-bottom: 1rem;
-            border-bottom: 1px solid var(--dark-gray);
+            border-bottom: 1px solid var(--border-color);
         }
 
         .logo-icon {
-            color: var(--gold);
+            color: var(--accent-color);
             font-size: 2rem;
             margin-right: 1rem;
         }
 
         .logo-text {
-            font-family: var(--font-secondary);
-            color: var(--gold);
+            font-family: var(--font-logo);
+            color: var(--accent-color);
             font-size: 1.5rem;
         }
 
@@ -74,15 +51,16 @@
             align-items: center;
             padding: 1rem;
             margin-bottom: 0.5rem;
-            color: var(--light-gray);
+            color: var(--text-secondary);
             text-decoration: none;
             border-radius: 8px;
             transition: background-color 0.3s, color 0.3s;
+            font-family: var(--font-navbar-footer);
         }
 
         .nav-link:hover, .nav-link.active {
-            background-color: var(--dark-gray);
-            color: var(--gold);
+            background-color: var(--background-card);
+            color: var(--accent-color);
         }
 
         .nav-link i {
@@ -94,7 +72,7 @@
 
         .sidebar-footer {
             padding-top: 1rem;
-            border-top: 1px solid var(--dark-gray);
+            border-top: 1px solid var(--border-color);
         }
 
 
@@ -107,17 +85,19 @@
 
         .main-header {
             margin-bottom: 2rem;
+            margin-top: 2rem; /* Espacio adicional desde el top */
         }
 
         .main-header h2 {
-            font-family: var(--font-secondary);
+            font-family: var(--font-h1-h2-h3);
             font-size: 2.5rem;
-            color: var(--light-gray);
+            color: var(--text-primary);
         }
 
         .main-header p {
-            color: var(--soft-gold);
+            color: var(--text-secondary);
             font-size: 1.1rem;
+            font-family: var(--font-p);
         }
 
         
@@ -128,12 +108,12 @@
         }
 
         .card {
-            background-color: var(--dark-gray);
+            background-color: var(--background-card);
             border-radius: 10px;
             padding: 2rem;
             display: flex;
             align-items: center;
-            border: 1px solid #333;
+            border: 1px solid var(--border-color);
             transition: transform 0.3s, box-shadow 0.3s;
         }
 
@@ -144,29 +124,31 @@
 
         .card-icon {
             font-size: 2.5rem;
-            color: var(--gold);
+            color: var(--accent-color);
             margin-right: 1.5rem;
         }
 
         .card-body h3 {
-            font-family: var(--font-secondary);
+            font-family: var(--font-h1-h2-h3);
             font-size: 1.5rem;
-            color: var(--light-gray);
+            color: var(--text-primary);
             margin-bottom: 0.5rem;
         }
 
         .card-body p {
-            color: #aaa;
+            color: var(--text-secondary);
             margin-bottom: 1.5rem;
+            font-family: var(--font-p);
         }
 
         .card-link {
-            color: var(--soft-gold);
+            color: var(--accent-color);
             text-decoration: none;
             font-weight: bold;
             transition: color 0.3s;
+            font-family: var(--font-navbar-footer);
         }
 
         .card-link:hover {
-            color: var(--gold);
+            color: var(--hover-color);
         }

@@ -1,9 +1,11 @@
-     .main-content {
+     /* Variables CSS importadas desde resetHtml.css */
+
+.main-content {
         display: flex;
         justify-content: center;
         align-items: flex-start; 
         min-height: 100vh;
-        padding: 120px 20px 80px; 
+        padding: 200px 20px 80px; /* Aumentado aún más el padding-top */
         box-sizing: border-box; 
 }
 
@@ -41,6 +43,7 @@
         text-transform: uppercase;
         letter-spacing: 2px;
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        font-family: var(--font-h1-h2-h3);
     }
 
     .login-subtitle {
@@ -48,6 +51,7 @@
         font-size: 14px;
         font-weight: 400;
         opacity: 0.9;
+        font-family: var(--font-p);
     }
 
     .input-group {
@@ -63,6 +67,7 @@
         margin-bottom: 8px;
         text-transform: uppercase;
         letter-spacing: 0.5px;
+        font-family: var(--font-navbar-footer);
     }
 
     .input-box {
@@ -81,6 +86,7 @@
         padding: 0 20px 0 50px;
         transition: all 0.3s ease;
         font-weight: 400;
+        font-family: var(--font-p);
     }
 
     .input-box input:focus {
@@ -141,6 +147,7 @@
         margin: 0;
         text-transform: none;
         letter-spacing: normal;
+        font-family: var(--font-p);
     }
 
     .forgot-password {
@@ -149,6 +156,7 @@
         font-weight: 500;
         transition: all 0.3s ease;
         position: relative;
+        font-family: var(--font-navbar-footer);
     }
 
     .forgot-password::after {
@@ -186,6 +194,7 @@
         box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
         position: relative;
         overflow: hidden;
+        font-family: var(--font-navbar-footer);
     }
 
     .login-btn::before {
@@ -223,6 +232,7 @@
         color: var(--text-secondary);
         font-size: 14px;
         margin-bottom: 8px;
+        font-family: var(--font-p);
     }
 
     .register-link {
@@ -232,6 +242,8 @@
         font-size: 15px;
         transition: all 0.3s ease;
         position: relative;
+        font-family: var(--font-navbar-footer);
+        font-weight: bolder;
     }
 
     .register-link::after {
@@ -272,13 +284,13 @@
     /* Responsive */
     @media (max-width: 768px) {
         .main-content {
-            padding: 100px 15px 60px;
+            padding: 140px 15px 60px; /* Ajustado para tablets */
         }
     }
 
     @media (max-width: 480px) {
         .main-content {
-            padding: 80px 15px 40px;
+            padding: 120px 15px 40px; /* Ajustado para móviles */
         }
         
         .login-container {

@@ -1,8 +1,12 @@
-    #hero {
+    /* Variables CSS importadas desde resetHtml.css */
+
+#hero {
             position: relative;
             overflow: hidden;
             width: 100%;
-            height: 90vh; 
+            height: 90vh;
+            z-index: 1;
+            margin-top: 10vh; /* Espacio para el navbar fijo */
         }
 
         #hero .wrapper {
@@ -55,6 +59,7 @@
             max-width: 90%;
             background: rgba(0, 0, 0, 0.2); /* Fondo semitransparente para mejor legibilidad */
             border-radius: 10px;
+            font-family: var(--font-h1-h2-h3);
         }
 
         #hero .slide p {
@@ -67,6 +72,7 @@
             background: rgba(0, 0, 0, 0.7);
             border-radius: 10px;
             line-height: 1.6;
+            font-family: var(--font-p);
         }
 
         @keyframes slideShow {
