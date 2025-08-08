@@ -57,7 +57,7 @@
         <h1 class="title">crear nueva receta</h1>
     </div>
 
-    @include('components.footer2')
+    @include('components.footer')
 
 </body>
 </html>

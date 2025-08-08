@@ -27,7 +27,7 @@ body::before {
     justify-content: center;
     align-items: flex-start;
     min-height: 100vh;
-    padding: 200px 20px 80px;
+    padding: 30px 20px 80px;
     box-sizing: border-box;
 }
 

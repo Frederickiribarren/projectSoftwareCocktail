@@ -1,83 +1,117 @@
-    /* Variables CSS importadas desde resetHtml.css */
+/* Variables CSS importadas desde resetHtml.css */
 
 #hero {
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-            height: 90vh;
-            z-index: 1;
-            margin-top: 10vh; /* Espacio para el navbar fijo */
-        }
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 90vh;
+    z-index: 1;
+    margin-top: 10vh;
+}
 
-        #hero .wrapper {
-            display: grid;
-            grid-auto-flow: column;
-            grid-auto-columns: 100vw; /* Cada slide ocupa todo el ancho */
-            animation: slideShow 30s infinite; /* 10s por cada imagen */
-        }
+#hero .wrapper {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 100vw;
+    animation: slideShow 30s infinite;
+}
 
-        #hero .slide {
-            width: 100vw;
-            height: 90vh;
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-position: center center;
-            display: flex;
-            align-items: center;
-            justify-content: start;
-            position: relative;
-            padding-top: 15vh; 
-            padding-left: 50px;
-        }
+#hero .slide {
+    width: 100vw;
+    height: 90vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    position: relative;
+    padding-top: 15vh; 
+    padding-left: 50px;
+}
 
-        .slide-content {
-            display: flex;
-            flex-direction: column;
-            max-width: 60%;
-            padding-top: 150px;
-        }
+.slide-content {
+    display: flex;
+    flex-direction: column;
+    max-width: 60%;
+    padding-top: 150px;
+}
 
-        #hero .slide-1 {
-            background-image: url('../img/HERO1.png');
-        }
+#hero .slide-1 {
+    background-image: url('../img/HERO1.png');
+}
 
-        #hero .slide-2 {
-            background-image: url('../img/HERO.png');
-        }
+#hero .slide-2 {
+    background-image: url('../img/HERO.png');
+}
 
-        #hero .slide-3 {
-            background-image: url('../img/HERO3.png');
-        }
+#hero .slide-3 {
+    background-image: url('../img/HERO3.png');
+}
 
-        #hero .slide h1 {
-            color: var(--accent-color);
-            font-size: 3rem;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
-            text-align: left;
-            margin: 0 0 20px 0;
-            padding: 20px;
-            max-width: 90%;
-            background: rgba(0, 0, 0, 0.2); /* Fondo semitransparente para mejor legibilidad */
-            border-radius: 10px;
-            font-family: var(--font-h1-h2-h3);
-        }
+#hero .slide .slide-content .hero-description {
+    color: var(--secondary-color);
+    font-size: 1.2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    text-align: left;
+    margin: 0;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    line-height: 1.6;
+    font-family: var(--font-p);
+}
 
-        #hero .slide p {
-            color: var(--secondary-color);
-            font-size: 1.2rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-            text-align: left; /* Mantener alineación izquierda */
-            margin: 0;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 10px;
-            line-height: 1.6;
-            font-family: var(--font-p);
-        }
+@keyframes slideShow {
+    0%, 30% { transform: translateX(0); }
+    33%, 63% { transform: translateX(-100vw); }
+    66%, 96% { transform: translateX(-200vw); }
+    100% { transform: translateX(0); }
+}
 
-        @keyframes slideShow {
-            0%, 30% { transform: translateX(0); }
-            33%, 63% { transform: translateX(-100vw); }
-            66%, 96% { transform: translateX(-200vw); }
-            100% { transform: translateX(0); }
-        }
+/* Mover esta regla AL FINAL para que tenga precedencia por cascada */
+#hero .slide .slide-content .hero-title {
+    color: var(--accent-color);
+    font-size: 3rem;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+    text-align: left;
+    margin: 0 0 20px 0;
+    padding: 20px;
+    max-width: 90%;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    font-family: var(--font-h1-h2-h3);
+}
+
+/* 📱 CLASES RESPONSIVAS - Agregar al final */
+.hide-mobile {
+    display: block;
+}
+
+.show-mobile-only {
+    display: none;
+}
+
+/* 📱 MEDIA QUERIES PARA MÓVILES */
+@media (max-width: 767px) {
+    #hero .slide {
+        padding-left: 20px;
+        padding-top: 10vh;
+    }
+    
+    #hero .slide .slide-content .hero-title {
+        font-size: 2rem;
+        padding: 15px;
+        max-width: 95%;
+    }
+    
+    .slide-content {
+        max-width: 90%;
+        padding-top: 100px;
+    }
+
+     /* 🚫 Ocultar descripción larga en móviles */
+    #hero .slide .slide-content .hero-description.hide-mobile {
+        display: none !important;
+    }
+}

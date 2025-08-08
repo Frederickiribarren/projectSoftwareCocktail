@@ -29,6 +29,24 @@
         gap: 32px;
     }
 
+   /* Ajuste dinámico cuando falta la sección Newsletter */
+    .footer-container:has(.footer-section:nth-child(4)) {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    /* Si no hay 4ta sección (Newsletter oculta), usar 3 columnas */
+    .footer-container:not(:has(.footer-section:nth-child(4))) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* Fallback para navegadores que no soportan :has() */
+    @supports not (selector(:has(*))) {
+        .footer-container.footer-three-cols {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+
     .footer-section h3 {
         color: var(--text-primary);
         font-size: 16px;
@@ -158,8 +176,8 @@
         font-family: var(--font-p);
     }
 
-    .footer-brand-title {
-        font-family: var(--font-logo) !important;
+    .footer .footer-section h3.footer-brand-title {
+        font-family: var(--font-logo);
         letter-spacing: 2px;
         word-spacing: 6px;
         color: var(--accent-color);
@@ -243,10 +261,17 @@
         transform: translateY(0);
     }
 
-    @media (max-width: 1024px) {
+    @@media (max-width: 1024px) {
         .footer-container {
             gap: 24px;
+        }
+        
+        .footer-container:has(.footer-section:nth-child(4)) {
             grid-template-columns: repeat(4, minmax(200px, 1fr));
+        }
+        
+        .footer-container:not(:has(.footer-section:nth-child(4))) {
+            grid-template-columns: repeat(3, minmax(200px, 1fr));
         }
     }
 
@@ -256,7 +281,7 @@
         }
         
         .footer-container {
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(2, 1fr) !important;
             gap: 24px;
             padding: 0 20px;
         }
@@ -277,7 +302,7 @@
 
     @media (max-width: 480px) {
         .footer-container {
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr !important;
             padding: 0 16px;
         }
 
@@ -297,7 +322,7 @@
 
 <footer class="footer">
     <div class="footer-container">
-        <!-- Sección Acerca de -->
+        <!-- Sección Acerca de - siempre visible -->
         <div class="footer-section">
             <div class="footer-logo"></div>
             <h3 class="footer-brand-title">COCKTAIL WORLD</h3>
@@ -310,7 +335,7 @@
             </div>
         </div>
 
-        <!-- Sección Contacto -->
+        <!-- Sección Contacto - solo en pagina principal -->
         <div class="footer-section">
             <h3>Contacto</h3>
             <div class="contact-info">
@@ -323,8 +348,9 @@
             <p>Lunes a Viernes de 09:00 a 18:00 hrs.</p>
             <p>Sábados de 10:00 a 14:00 hrs.</p>
         </div>
+       
 
-        <!-- Sección Enlaces -->
+        <!-- Sección Enlaces - siempre sera visible -->
         <div class="footer-section">
             <h3>Enlaces de Interés</h3>
             <ul>
@@ -337,7 +363,8 @@
             </ul>
         </div>
 
-        <!-- Sección Newsletter -->
+        <!-- Sección Newsletter - solo pagina principal -->
+        @if(Request::routeIs('inicio') || Request::routeIs('/'))
         <div class="footer-section">
             <h3>Newsletter</h3>
             <div class="newsletter">
@@ -352,10 +379,11 @@
             <h3 style="margin-top: 25px;">Síguenos</h3>
             <p>Mantente al día con nuestras últimas creaciones y eventos especiales en nuestras redes sociales.</p>
         </div>
+        @endif
     </div>
 
     <div class="footer-bottom">
-        <p>&copy; {{ date('Y') }} INFINITY INFUSIONS. Todos los derechos reservados. | Diseñado para proyecto de instituto </p>
+        <p>&copy; {{ date('Y') }} COCKTAIL WORLD. Todos los derechos reservados. | Diseñado para proyecto de instituto </p>
         <p>El consumo de alcohol puede ser perjudicial para la salud. Disfruta con responsabilidad.</p>
     </div>
 </footer>
