@@ -25,15 +25,19 @@
                     </div>
                 </li>
                 <li><a href="" class="nav-link-main">Contacto</a></li>
+                @auth
                 <li><a href="{{ route('dashboard') }}" class="nav-link-main">Dashboard</a></li>
+                @endauth
             </ul>
         </div>
         <div>
+            <!--Revisar el css para la responsividad del navbar, cuando cambia por autentificación -->
             <div>
             <ul class="nav-links">
                 @auth
                     <li>
                         <div class="dropdown">
+                            <i class='bx bxs-user'></i>
                             <a href="#" class="nav-link-main">{{ Auth::user()->name }}</a>
                             <div class="dropdown-content">
                                 <a href="{{ route('dashboard') }}" class="dropdown-link">Dashboard</a>

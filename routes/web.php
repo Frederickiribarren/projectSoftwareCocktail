@@ -11,29 +11,29 @@ Route::get('/recipes', function () {
     return view('pages.recipes');
 })->name('recipes');
 
-Route::get('/show', function () {
-    return view('layouts.show');
-})->name('show');
-
 Route::get('/login', function () {
     return view('pages.ingreso');
 })->name('login');
 
+Route::get('/show', function () {
+    return view('layouts.show');
+})->middleware(['auth', 'verified'])->name('show');
+
 Route::get('/edit', function () {
     return view('layouts.edit');
-})->name('edit');
+})->middleware(['auth', 'verified'])->name('edit');
 
 Route::get('/index', function () {
     return view('layouts.index');
-})->name('index');
+})->middleware(['auth', 'verified'])->name('index');
 
 Route::get('/create', function () {
     return view('layouts.create');
-})->name('create');
+})->middleware(['auth', 'verified'])->name('create');
 
 Route::get('/travel', function () {
     return view('layouts.travel');
-})->name('travel');
+})->middleware(['auth', 'verified'])->name('travel');
 
 Route::get('/dashboard', function () {
     return view('pages.dashboard');
