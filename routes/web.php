@@ -15,6 +15,8 @@ Route::get('/login', function () {
     return view('pages.ingreso');
 })->name('login');
 
+//Revisar group:function para reducir las rutas que requiera el middleware de autenticación//
+
 Route::get('/show', function () {
     return view('layouts.show');
 })->middleware(['auth', 'verified'])->name('show');
