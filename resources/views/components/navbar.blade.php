@@ -29,9 +29,29 @@
             </ul>
         </div>
         <div>
+            <div>
             <ul class="nav-links">
-                <li><a href="{{ route('login') }}" class="nav-link-main">Iniciar Sesión</a></li>
-                <li><a href="" class="cta-button">Registrarse</a></li>
+                @auth
+                    <li>
+                        <div class="dropdown">
+                            <a href="#" class="nav-link-main">{{ Auth::user()->name }}</a>
+                            <div class="dropdown-content">
+                                <a href="{{ route('dashboard') }}" class="dropdown-link">Dashboard</a>
+                                <a href="{{ route('profile.edit') }}" class="dropdown-link">Perfil</a>
+                                <form method="POST" action="{{ route('logout') }}" style="margin: 0;">
+                                    @csrf
+                                    <a href="{{ route('logout') }}" class="dropdown-link"
+                                        onclick="event.preventDefault(); this.closest('form').submit();">
+                                        Cerrar Sesión
+                                    </a>
+                                </form>
+                            </div>
+                        </div>
+                    </li>
+                @else
+                    <li><a href="{{ route('login') }}" class="nav-link-main">Iniciar Sesión</a></li>
+                    <li><a href="{{ route('register') }}" class="cta-button">Registrarse</a></li>
+                @endauth
             </ul>
         </div>
     </div>

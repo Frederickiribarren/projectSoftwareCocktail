@@ -32,7 +32,7 @@
                 <h1 class="logo-text">Cocktail World</h1>
             </div>
             <nav class="sidebar-nav">
-                <a href="{{ route('edit') }}" class="nav-link">
+                <a href="{{ route('profile.edit') }}" class="nav-link">
                     <i class="fas fa-user"></i>
                     <span>Perfil</span>
                 </a>
@@ -66,7 +66,7 @@
         </aside>
         <main class="main-content">
             <header class="main-header">
-                <h2>Bienvenido, [Nombre de Usuario]</h2>
+                <h2>Bienvenido, {{ Auth::user()->name }}</h2>
                 <p>Explora y administra tus creaciones.</p>
             </header>
             <section class="dashboard-cards">
