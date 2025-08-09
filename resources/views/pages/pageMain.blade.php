@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{ asset('css/resetHtml.css') }}">
     <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
     <link rel="stylesheet" href="{{ asset('css/hero.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/typesPreparation.css') }}">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 </head>
@@ -32,9 +33,8 @@
         <div class="slide slide-2">
             <div class="slide-content">
                 <h1 class="hero-title">Recetas Clásicas y Modernas</h1>
-                <p class="hero-description hide-mobile">Las recetas clásicas de coctelería son el alma de los bares: elegantes, equilibradas y con carácter. Piezas como el Martini, Daiquiri o Manhattan han resistido el paso del tiempo gracias a su simplicidad y perfección. Cada uno es una obra maestra donde cada ingrediente tiene su papel protagónico.<br>
-                Las recetas modernas, en cambio, rompen moldes. Bartenders actuales experimentan con técnicas como infusiones, clarificados, fermentaciones y espumas para crear cócteles visualmente impactantes y sabores sorprendentes. Aquí hay espacio para la ciencia, la narrativa personal y la reinterpretación de lo tradicional.
-                </p>
+                <p class="hero-description hide-mobile">Las recetas clásicas de coctelería son el alma de los bares: elegantes, equilibradas y con carácter. <br>
+                Las recetas modernas, en cambio, rompen moldes. Bartenders actuales experimentan con técnicas como infusiones, clarificados, fermentaciones y espumas para crear cócteles visualmente impactantes y sabores sorprendentes.
             </div>
         </div>
         <div class="slide slide-3">
@@ -46,6 +46,23 @@
     </div>
 </header>
    @include('components.separador')
+
+   <section class="types-preparation">
+       <div class="type-img">
+        <div class="type-title">
+            <h3 class="type-title-preparation">Técnicas de Preparación</h3>
+        </div>
+        <div class="type-list">
+            <ol class="type-list-items">
+                <li class="type-list-item">Directo</li>
+                <li class="type-list-item">Refrescado</li>
+                <li class="type-list-item">Batidos</li>
+                <li class="type-list-item">Licuados</li>
+                <li class="type-list-item">Doble Colado</li>
+            </ol>
+        </div>
+        </div>
+   </section>
 
 
    @include('components.footer')

@@ -4,10 +4,6 @@
             <div class="logo" style="background-image: url({{ asset('img/logo3.png') }});"></div>
             <p class="brand-title">COCKTAIL WORLD</p>
         </div>
-        
-
-
-
         <!-- Menú de navegación -->
         <div>
             <ul class="nav-links">

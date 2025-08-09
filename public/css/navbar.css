@@ -10,6 +10,16 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
+.top-navbar::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+    }
+
 .container-navbar {
     display: flex;
     justify-content: space-between;
@@ -57,6 +67,7 @@
     font-family: var(--font-navbar-footer);
 }
 
+
 /* Enlaces principales del navbar */
 .nav-link-main {
     text-decoration: none;
@@ -79,6 +90,7 @@
     padding: 10px 20px;
     border-radius: 20px;
     transition: background-color 0.3s ease, color 0.3s ease;
+    text-decoration: none;
 }
 
 .nav-links li a.cta-button:hover {
