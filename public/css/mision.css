@@ -1,0 +1,73 @@
+.mision {
+    height: 70vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mision .mision-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    width: 80%;
+}
+
+.mision .mision-container .mision-image-container {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mision .mision-container .mision-image {
+    background-image: url('../img/logo2.png');
+    width: 350px;
+    height: 350px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    border-radius: 50%;
+    border: 2px solid var(--accent-color);
+}
+
+.mision .mision-container .mision-content {
+    width: 50%;
+    padding: 20px;
+    color: var(--text-primary);
+}
+
+
+.mision .mision-container .mision-content .mision-title {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: var(--accent-color);
+    font-family: var(--font-h1-h2-h3);
+}
+
+.mision .mision-container .mision-content .mision-description {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    font-family: var(--font-p);
+}
+
+@media (max-width: 768px) {
+    .mision .mision-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .mision .mision-container .mision-image-container,
+    .mision .mision-container .mision-content {
+        width: 100%;
+        text-align: center;
+    }
+
+    .mision .mision-container .mision-image {
+        width: 150px;
+        height: 150px;
+    }
+}

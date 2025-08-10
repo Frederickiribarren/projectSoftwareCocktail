@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{ asset('css/resetHtml.css') }}">
     <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
     <link rel="stylesheet" href="{{ asset('css/hero.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/mision.css') }}">
     <link rel="stylesheet" href="{{ asset('css/typesPreparation.css') }}">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
@@ -45,7 +46,18 @@
         </div>
     </div>
 </header>
-   @include('components.separador')
+
+   <section class="mision">
+    <div class="mision-container">
+        <div class="mision-image-container">
+            <div class="mision-image"></div>
+        </div>
+        <div class="mision-content">
+            <h3 class="mision-title">Más que Cócteles, Creamos Conexiones</h3>
+            <p class="mision-description">En Cocktail World, vemos la coctelería como algo más que una simple mezcla de bebidas; es un arte, una forma de expresión y una excusa perfecta para conectar. Nuestra misión es construir el puente entre la curiosidad del principiante y la maestría del experto, ofreciendo un espacio donde la pasión por los sabores es el idioma universal. Aquí no solo encontrarás un recetario, sino las historias detrás de cada trago, las técnicas para perfeccionar tu arte y la inspiración para experimentar. Pero esta comunidad no está completa sin ti.</p>
+        </div>
+    </div>
+   </section>
 
    <section class="types-preparation">
        <div class="type-img">
