@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\recipe;
+use App\Models\Recipe;
 use Illuminate\Http\Request;
 
-class recipeController extends Controller
+class RecipeController extends Controller
 {
     public function index()
     {
-        $recipe = recipe::all();
-        return view('recipes.index', compact('recipes'));
+        $recipes = Recipe::all();
+        return view('pages.recipes', compact('recipes'));
     }
 
     public function create()
@@ -37,5 +37,11 @@ class recipeController extends Controller
 
         return redirect()->route('recipes.show', $recipe)
             ->with('success', 'Recipe created successfully.');
+    }
+
+    public function destroy(Recipe $recipe)
+    {
+        $recipe->delete();
+        return redirect()->route('recipes')->with('success', 'Receta eliminada correctamente');
     }
 }

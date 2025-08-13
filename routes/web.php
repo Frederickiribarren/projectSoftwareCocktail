@@ -1,22 +1,16 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\RecipeController;
+use App\Http\Controllers\IngredientsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('pages.pageMain');
 })->name('inicio');
 
-Route::get('/recipes', function () {
-    $recipes = \App\Models\Recipe::all();
-    return view('pages.recipes', compact('recipes'));
-})->name('recipes');
-
-Route::delete('/recipes/{recipe}', function($recipe) {
-    \App\Models\Recipe::destroy($recipe);
-    return redirect()->route('recipes')->with('success', 'Receta eliminada correctamente');
-})->name('recipes.destroy')->middleware(['auth', 'verified']);
+Route::get('/recipes', [RecipeController::class, 'index'])->name('recipes');
+Route::delete('/recipes/{recipe}', [RecipeController::class, 'destroy'])->name('recipes.destroy')->middleware(['auth', 'verified']);
 
 Route::get('/login', function () {
     return view('pages.ingreso');
@@ -32,11 +26,9 @@ Route::get('/edit', function () {
     return view('layouts.edit');
 })->middleware(['auth', 'verified'])->name('edit');
 
-Route::get('/index', function () {
-    $ingredients = \App\Models\Ingredient::all();
-    $userIngredients = auth()->user()->ingredients->pluck('id')->toArray();
-    return view('layouts.index', compact('ingredients', 'userIngredients'));
-})->middleware(['auth', 'verified'])->name('index');
+Route::get('/index', [IngredientsController::class, 'index'])->middleware(['auth', 'verified'])->name('index');
+
+Route::post('/inventory/update', [IngredientsController::class, 'updateInventory'])->middleware(['auth', 'verified'])->name('inventory.update');
 
 Route::get('/create', function () {
     return view('recipes.create');
@@ -56,11 +48,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::post('/inventory/update', function (Request $request) {
-    $user = auth()->user();
-    $ingredientIds = $request->ingredients ?? [];
-    $user->ingredients()->sync($ingredientIds);
-    return redirect()->back()->with('success', 'Inventario actualizado correctamente');
-})->middleware(['auth', 'verified'])->name('inventory.update');
+
 
 require __DIR__.'/auth.php';
