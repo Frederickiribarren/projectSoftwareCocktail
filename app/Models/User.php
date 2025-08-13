@@ -21,4 +21,8 @@ class User extends Authenticatable
         'remember_token',
     ];
     
+    public function ingredients()
+    {
+        return $this->belongsToMany(Ingredient::class, 'user_ingredients');
+    }
 }

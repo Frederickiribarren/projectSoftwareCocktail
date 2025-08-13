@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -8,8 +9,14 @@ Route::get('/', function () {
 })->name('inicio');
 
 Route::get('/recipes', function () {
-    return view('pages.recipes');
+    $recipes = \App\Models\Recipe::all();
+    return view('pages.recipes', compact('recipes'));
 })->name('recipes');
+
+Route::delete('/recipes/{recipe}', function($recipe) {
+    \App\Models\Recipe::destroy($recipe);
+    return redirect()->route('recipes')->with('success', 'Receta eliminada correctamente');
+})->name('recipes.destroy')->middleware(['auth', 'verified']);
 
 Route::get('/login', function () {
     return view('pages.ingreso');
@@ -26,11 +33,13 @@ Route::get('/edit', function () {
 })->middleware(['auth', 'verified'])->name('edit');
 
 Route::get('/index', function () {
-    return view('layouts.index');
+    $ingredients = \App\Models\Ingredient::all();
+    $userIngredients = auth()->user()->ingredients->pluck('id')->toArray();
+    return view('layouts.index', compact('ingredients', 'userIngredients'));
 })->middleware(['auth', 'verified'])->name('index');
 
 Route::get('/create', function () {
-    return view('layouts.create');
+    return view('recipes.create');
 })->middleware(['auth', 'verified'])->name('create');
 
 Route::get('/travel', function () {
@@ -46,5 +55,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::post('/inventory/update', function (Request $request) {
+    $user = auth()->user();
+    $ingredientIds = $request->ingredients ?? [];
+    $user->ingredients()->sync($ingredientIds);
+    return redirect()->back()->with('success', 'Inventario actualizado correctamente');
+})->middleware(['auth', 'verified'])->name('inventory.update');
 
 require __DIR__.'/auth.php';

@@ -44,38 +44,28 @@
 
             
             <section class="cocktail-gallery">
-                
+                @foreach($recipes as $recipe)
                 <div class="cocktail-card">
-                    <img src="{{ asset('img/mojito.png') }}" alt="Mojito" class="card-image">
+                    <img src="{{ asset('img/michelada.png') }}" alt="{{ $recipe->name }}" class="card-image">
                     <div class="card-info">
-                        <h3 class="card-title">Mojito Clásico</h3>
-                        <p class="card-description">Un cóctel cubano refrescante, con ron, menta, lima y soda.</p>
-                        <a href="{{ route('show') }}" class="card-link">Ver Receta &rarr;</a>
+                        <h3 class="card-title">{{ $recipe->name }}</h3>
+                        <p class="card-description">{{ $recipe->instructions }}</p>
+                        <div class="card-actions">
+                            <a href="{{ route('show', $recipe->id) }}" class="card-link">Ver Receta &rarr;</a>
+                            <a href="{{ route('edit', $recipe->id) }}" class="btn-edit">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <form action="{{ route('recipes.destroy', $recipe->id) }}" method="POST" style="display: inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn-delete" onclick="return confirm('¿Estás seguro?')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
-
-                
-                <div class="cocktail-card">
-                    <img src="{{ asset('img/margarita.png') }}" alt="Margarita" class="card-image">
-                    <div class="card-info">
-                        <h3 class="card-title">Margarita Tradicional</h3>
-                        <p class="card-description">El icónico cóctel mexicano con tequila, licor de naranja y jugo de lima.</p>
-                        <a href="{{ route('show') }}" class="card-link">Ver Receta &rarr;</a>
-                    </div>
-                </div>
-
-                
-                <div class="cocktail-card">
-                    <img src="{{ asset('img/michelada.png') }}" alt="michelada" class="card-image">
-                    <div class="card-info">
-                        <h3 class="card-title">Michelada</h3>
-                        <p class="card-description">Para los amantes de lo picante, la cerveza, el limon, salsas y sal.</p>
-                        <a href="{{ route('show') }}" class="card-link">Ver Receta &rarr;</a>
-                    </div>
-                </div>
-
-                
-
+                @endforeach
             </section>
         </main>
     </div>

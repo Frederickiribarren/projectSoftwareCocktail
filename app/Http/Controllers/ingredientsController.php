@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ingredient;
 use Illuminate\Http\Request;
 
-class ingredientsController extends Controller
+class IngredientsController extends Controller
 {
     public function index()
     {
-        $ingredients = ingredients::all();
+        $ingredients = Ingredient::all();
         return view('ingredients.index', compact('ingredients'));
     }
 }

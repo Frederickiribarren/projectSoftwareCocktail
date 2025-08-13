@@ -21,4 +21,13 @@ class recipe extends Model
         'source_api_id',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function ingredients()
+    {
+        return $this->hasMany(recipe_ingredients::class);
+    }
 }
