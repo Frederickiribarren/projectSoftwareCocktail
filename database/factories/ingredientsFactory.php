@@ -17,15 +17,45 @@ class ingredientsFactory extends Factory
     protected $model = ingredients::class;
     public function definition(): array
     {
+        $categories = [
+            'Spirits',
+            'Liqueurs',
+            'Mixers',
+            'Juices',
+            'Fruits',
+            'Herbs',
+            'Syrups',
+            'Others'
+        ];
+
+        $flavorProfiles = [
+            'Sweet',
+            'Sour',
+            'Bitter',
+            'Spicy',
+            'Fruity',
+            'Herbal',
+            'Woody',
+            'Floral',
+            'Citrus',
+            'Smoky'
+        ];
+
         // Obtener un ID de ingrediente existente o null
         $parentIngredientId = ingredients::inRandomOrder()->first()?->id;
+
+        // Determinar si es alcohólico basado en la categoría
+        $category = $this->faker->randomElement($categories);
+        $isAlcoholic = in_array($category, ['Spirits', 'Liqueurs']) ? true : $this->faker->boolean(20);
+
         return [
             'name' => $this->faker->unique()->word(),
-            'description' => $this->faker->optional()->sentence(),
-            'is_alcoholic' => $this->faker->numberBetween(0, 1),
-            'parent_ingredient_id' =>  $parentIngredientId,
-            'flavor_profile_tags' => json_encode($this->faker->optional()->words(3, true)),
-            'source_api_id' => $this->faker->optional()->uuid(),
+            'description' => $this->faker->sentence(),
+            'category' => $category,
+            'is_alcoholic' => $isAlcoholic,
+            'parent_ingredient_id' => $parentIngredientId,
+            'flavor_profile_tags' => json_encode($this->faker->randomElements($flavorProfiles, random_int(1, 3))),
+            'source_api_id' => $this->faker->uuid(),
         ];
     }
 }

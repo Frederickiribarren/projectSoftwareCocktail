@@ -4,8 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\inventories;
-use database\factories\inventoriesFactory;
+use App\Models\Inventory;
 
 class inventoriesSeeder extends Seeder
 {
@@ -14,6 +13,6 @@ class inventoriesSeeder extends Seeder
      */
     public function run(): void
     {
-        inventories::factory()->count(10)->create();
+        Inventory::factory()->count(10)->create();
     }
 }

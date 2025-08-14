@@ -23,8 +23,9 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->index()->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->enum('source', ["system","user_manual","user_ocr","user_ai_generated"]);
-            $table->boolean('is_private')->index()->default(DEFAULT : TRUE);
-            $table->string('source_api_id', 255)->index()->nullable();
+            $table->boolean('is_private')->index()->default(true);
+            $table->unsignedBigInteger('source_api_id')->index()->nullable();
+            $table->foreign('source_api_id')->references('id')->on('source_apis');
             $table->timestamp('created_at')->nullable()->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrent();
         });

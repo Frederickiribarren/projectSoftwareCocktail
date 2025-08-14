@@ -43,13 +43,17 @@
                     <i class="fas fa-plane"></i>
                     <span>Modo Viaje</span>
                 </a>
-                <a href="{{ route('index') }}" class="nav-link">
+                <a href="{{ route('inventory') }}" class="nav-link">
                     <i class="fas fa-wine-bottle"></i>
                     <span>Mi Bar</span>
                 </a>
                 <a href="#" class="nav-link">
                     <i class="fas fa-cog"></i>
                     <span>Configuración</span>
+                </a>
+                <a href="{{ route('database.admin') }}" class="nav-link">
+                    <i class="fas fa-database"></i>
+                    <span>Administrar Base de Datos</span>
                 </a>
             </nav>
             <div class="sidebar-footer">
@@ -82,7 +86,7 @@
                     <div class="card-body">
                         <h3>Mi Bar</h3>
                         <p>Administra los ingredientes disponibles para ti.</p>
-                        <a href="{{ route('index') }}" class="card-link">Ir a Mi Bar &rarr;</a>
+                        <a href="{{ route('inventory') }}" class="card-link">Ir a Mi Bar &rarr;</a>
                     </div>
                 </div>
                  <div class="card">
