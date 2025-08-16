@@ -388,14 +388,13 @@
                             brand: ingredient.brand || 'Generic',
                             stock: ingredient.users[0]?.pivot?.quantity || 0,
                             unit: ingredient.unit || 'unit',
-                            // Modificar esta línea también
                             flavors: Array.isArray(ingredient.flavor_profile_tags) ? ingredient.flavor_profile_tags : [],
                             isAlcoholic: ingredient.is_alcoholic || false,
                             status: 'ok'
                         }));
                         updateIngredientList();
                         closeModal();
-                        // Opcional: Mostrar mensaje de éxito
+                        
                         alert('Ingrediente agregado correctamente');
                     } else {
                         throw new Error(data.message || 'Error al guardar el ingrediente');
