@@ -3,11 +3,15 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\IngredientsController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('pages.pageMain');
 })->name('inicio');
+
+Route::get('/usuario/index',[UserController::class, 'index'])->middleware(['auth', 'verified'])->name('usuario.index');
+Route::resource('usuario',UserController::class);
 
 Route::get('/recipes', [RecipeController::class, 'index'])->name('recipes');
 Route::delete('/recipes/{recipe}', [RecipeController::class, 'destroy'])->name('recipes.destroy')->middleware(['auth', 'verified']);
