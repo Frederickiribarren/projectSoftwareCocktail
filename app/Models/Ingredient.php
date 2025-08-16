@@ -16,6 +16,14 @@ class Ingredient extends Model
         'parent_ingredient_id',
         'flavor_profile_tags',
         'source_api_id',
+        'category',
+        'brand',
+        'unit',
+    ];
+
+    protected $casts = [
+        'flavor_profile_tags' => 'array',
+        'is_alcoholic' => 'boolean'
     ];
 
     public function users()
