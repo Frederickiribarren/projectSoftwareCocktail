@@ -20,7 +20,7 @@
                 <li class="dropdown">
                     <a href="" class="nav-link-main">Biblioteca</a>
                     <div class="dropdown-content">
-                        <a href="" class="dropdown-link">Libros de Cócteles</a>
+                        <a href="{{ route('inventories.index') }}" class="dropdown-link">Libros de Cócteles</a>
                         <a href="" class="dropdown-link">Utensilios de Bar</a>
                         <a href="" class="dropdown-link">Ingredientes</a>
                     </div>

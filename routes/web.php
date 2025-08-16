@@ -3,12 +3,16 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\IngredientsController;
+use App\Http\Controllers\inventoriesController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('pages.pageMain');
 })->name('inicio');
+
+/*rutas de inventories*/
+Route::get('/inventories',[inventoriesController::class,'index'])->name('inventories.index');
 
 Route::get('/usuario/index',[UserController::class, 'index'])->middleware(['auth', 'verified'])->name('usuario.index');
 Route::resource('usuario',UserController::class);
