@@ -16,14 +16,16 @@ return new class extends Migration
         Schema::create('ingredients', function (Blueprint $table) {
             $table->id();
             $table->string('name', 255)->unique()->index();
+            $table->string('category')->nullable();
+            $table->string('brand')->nullable();
+            $table->string('unit')->default('unit');
             $table->text('description')->nullable();
-            $table->boolean('is_alcoholic')->index()->default(DEFAULT : false);
+            $table->boolean('is_alcoholic')->index()->default(false);
             $table->unsignedBigInteger('parent_ingredient_id')->nullable();
             $table->foreign('parent_ingredient_id')->references('id')->on('ingredients');
             $table->json('flavor_profile_tags')->nullable();
             $table->string('source_api_id', 255)->index()->nullable();
-            $table->timestamp('created_at')->nullable()->useCurrent();
-            $table->timestamp('updated_at')->nullable()->useCurrent();
+            $table->timestamps();
         });
 
         Schema::enableForeignKeyConstraints();
@@ -38,3 +40,4 @@ return new class extends Migration
         Schema::dropIfExists('ingredients');
     }
 };
+

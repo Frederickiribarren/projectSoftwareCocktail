@@ -22,11 +22,13 @@ Route::get('/show', function () {
     return view('layouts.show');
 })->middleware(['auth', 'verified'])->name('show');
 
+
+
 Route::get('/edit', function () {
     return view('layouts.edit');
 })->middleware(['auth', 'verified'])->name('edit');
 
-Route::get('/index', [IngredientsController::class, 'index'])->middleware(['auth', 'verified'])->name('index');
+Route::get('/inventory', [IngredientsController::class, 'inventory'])->middleware(['auth', 'verified'])->name('inventory');
 
 Route::post('/inventory/update', [IngredientsController::class, 'updateInventory'])->middleware(['auth', 'verified'])->name('inventory.update');
 

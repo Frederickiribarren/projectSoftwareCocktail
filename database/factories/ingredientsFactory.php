@@ -4,28 +4,33 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\ingredients;
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ingredients>
- */
+
 class ingredientsFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     protected $model = ingredients::class;
+
+    protected static $categories = ['spirits', 'liqueurs', 'juices', 'mixers', 'others'];
+    protected static $brands = ['Premium', 'Standard', 'House', 'Generic', 'Artesanal', 'Local'];
+    protected static $units = ['unit', 'ml', 'bottle', 'can'];
+    protected static $flavors = [
+        'Dulce', 'Ácido', 'Amargo', 'Salado', 'Umami', 'Frutal', 'Cítrico',
+        'Herbáceo', 'Especiado', 'Floral', 'Ahumado', 'Terroso', 'Tropical'
+    ];
+
     public function definition(): array
     {
-        // Obtener un ID de ingrediente existente o null
-        $parentIngredientId = ingredients::inRandomOrder()->first()?->id;
+        $randomFlavors = $this->faker->randomElements(self::$flavors, $this->faker->numberBetween(1, 4));
+        
         return [
-            'name' => $this->faker->unique()->word(),
-            'description' => $this->faker->optional()->sentence(),
-            'is_alcoholic' => $this->faker->numberBetween(0, 1),
-            'parent_ingredient_id' =>  $parentIngredientId,
-            'flavor_profile_tags' => json_encode($this->faker->optional()->words(3, true)),
-            'source_api_id' => $this->faker->optional()->uuid(),
+            'name' => $this->faker->unique()->words($this->faker->numberBetween(2, 4), true),
+            'category' => $this->faker->randomElement(self::$categories),
+            'brand' => $this->faker->randomElement(self::$brands) . ' ' . $this->faker->company(),
+            'unit' => $this->faker->randomElement(self::$units),
+            'description' => $this->faker->sentence($this->faker->numberBetween(10, 20)),
+            'is_alcoholic' => $this->faker->boolean(70),
+            'flavor_profile_tags' => json_encode($randomFlavors), // Convertir a JSON
+            'source_api_id' => $this->faker->unique()->numberBetween(1000, 9999),
+            'parent_ingredient_id' => null,
         ];
     }
 }
