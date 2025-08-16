@@ -4,12 +4,18 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\IngredientsController;
 use App\Http\Controllers\inventoriesController;
+use App\Http\Controllers\user_recipe_notesController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('pages.pageMain');
 })->name('inicio');
+/*ruta notas*/ 
+Route::middleware(['auth'])->group(function () {
+    Route::resource('user_recipe_notes', user_recipe_notesController::class);
+});
+route::get('/user_recipe_notes', [user_recipe_notesController::class, 'index'])->name('user_recipe_notes.index');
 
 /*rutas de inventories*/
 Route::get('/inventories',[inventoriesController::class,'index'])->name('inventories.index');
