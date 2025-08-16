@@ -1,0 +1,113 @@
+
+.notes-container {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-top: 10vh;
+}
+
+.notes-title {
+    font-family: var(--font-h1-h2-h3);
+    color: var(--text-primary);
+    margin-bottom: 2rem;
+    text-align: center;
+    font-size: 2.5rem;
+}
+
+.create-note-btn {
+    display: inline-block;
+    background-color: var(--soft-gold);
+    color: var(--primary-color);
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-family: var(--font-navbar-footer);
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+}
+
+.create-note-btn:hover {
+    background-color: var(--hover-color);
+    transform: translateY(-2px);
+}
+
+.notes-table {
+    width: 100%;
+    background-color: var(--background-card);
+    border-radius: 10px;
+    overflow: hidden;
+    border-collapse: collapse;
+}
+
+.notes-table th {
+    background-color: var(--background-card2);
+    color: var(--soft-gold);
+    padding: 1rem;
+    text-align: left;
+    font-family: var(--font-navbar-footer);
+}
+
+.notes-table td {
+    padding: 1rem;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border-color);
+    font-family: var(--font-p);
+}
+
+.notes-table tr:hover {
+    background-color: rgba(224, 197, 110, 0.1);
+}
+
+.action-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn {
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-navbar-footer);
+    transition: all 0.3s ease;
+}
+
+.btn-view {
+    background-color: var(--dark-grey);
+    color: var(--text-primary);
+}
+
+.btn-edit {
+    background-color: var(--soft-gold);
+    color: var(--primary-color);
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    color: var(--text-primary);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-subtle);
+}
+
+.empty-message {
+    text-align: center;
+    color: var(--text-muted);
+    font-family: var(--font-p);
+    padding: 2rem;
+}
+
+.alert {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    font-family: var(--font-p);
+}
+
+.alert-success {
+    background-color: rgba(40, 167, 69, 0.2);
+    color: #28a745;
+    border: 1px solid #28a745;
+}

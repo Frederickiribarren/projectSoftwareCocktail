@@ -15,6 +15,7 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function () {
     Route::resource('user_recipe_notes', user_recipe_notesController::class);
 });
+
 route::get('/user_recipe_notes', [user_recipe_notesController::class, 'index'])->name('user_recipe_notes.index');
 
 /*rutas de inventories*/

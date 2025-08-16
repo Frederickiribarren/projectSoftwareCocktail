@@ -36,9 +36,9 @@
                     <i class="fas fa-user"></i>
                     <span>Perfil</span>
                 </a>
-                <a href="#" class="nav-link">
+                <a href="{{ route('user_recipe_notes.index') }}" class="nav-link">
                     <i class="fas fa-tachometer-alt"></i>
-                    <span>Dashboard</span>
+                    <span>mis notas receta</span>
                 </a>
                 <a href="#" class="nav-link">
                     <i class="fas fa-martini-glass-citrus"></i>
