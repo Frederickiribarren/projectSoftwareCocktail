@@ -20,7 +20,7 @@
                 <li class="dropdown">
                     <a href="" class="nav-link-main">Biblioteca</a>
                     <div class="dropdown-content">
-                        <a href="{{ route('user_recipe_notes.index') }}" class="nav-link">Mis Notas de Recetas</a>
+                        <a href="{{ route('user_recipe_notes.index') }}" class="dropdown-link">Mis Notas de Recetas</a>
                         <a href="{{ route('inventories.index') }}" class="dropdown-link">Libros de Cócteles</a>
                         <a href="" class="dropdown-link">Utensilios de Bar</a>
                         <a href="" class="dropdown-link">Ingredientes</a>
