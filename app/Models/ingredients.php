@@ -1,21 +1,2 @@
 <?php
-
-namespace App\Models;
-
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-
-class ingredients extends Model
-{
-    use HasFactory;
-
-    protected $fillable = [
-        'name',
-        'description',
-        'is_alcoholic',
-        'parent_ingredient_id',
-        'flavor_profile_tags',
-        'source_api_id',
-    ];
-
-}
+// Este archivo ha sido reemplazado por app/Models/Ingredient.php

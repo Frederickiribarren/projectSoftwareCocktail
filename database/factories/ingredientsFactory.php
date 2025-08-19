@@ -3,11 +3,11 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\ingredients;
+use App\Models\Ingredient;
 
 class ingredientsFactory extends Factory
 {
-    protected $model = ingredients::class;
+    protected $model = Ingredient::class;
 
     protected static $categories = ['spirits', 'liqueurs', 'juices', 'mixers', 'others'];
     protected static $brands = ['Premium', 'Standard', 'House', 'Generic', 'Artesanal', 'Local'];
