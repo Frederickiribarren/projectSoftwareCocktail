@@ -987,7 +987,7 @@
         </div>
     </div>
 
-    @include('components.footer2')
+    @include('components.footer')
 
     <style>
         @keyframes fadeIn {

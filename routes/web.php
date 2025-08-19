@@ -77,9 +77,9 @@ Route::get('/show', function () {
 
 Route::get('/profile', function () {
     return view('layouts.edit');
-})->name('edit');
-
 })->middleware(['auth', 'verified'])->name('edit');
+
+
 
 Route::get('/inventory', [IngredientsController::class, 'inventory'])->middleware(['auth', 'verified'])->name('inventory');
 
@@ -91,7 +91,7 @@ Route::get('/create', function () {
 
 Route::get('/travel', function () {
     return view('layouts.travel');
-})->name('travel');
+})->middleware(['auth', 'verified'])->name('travel');
 
 Route::get('/inventory', function () {
     return view('layouts.inventory');
@@ -112,7 +112,7 @@ Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
 
 Route::post('/admin/recipes/import-from-api', [RecipeImportController::class, 'importFromApi'])
     ->name('recipes.import');
-})->middleware(['auth', 'verified'])->name('travel');
+
 
 Route::get('/dashboard', function () {
     return view('pages.dashboard');

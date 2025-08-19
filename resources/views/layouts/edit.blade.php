@@ -423,7 +423,7 @@
         </div>
     </div>
 
-    @include('components.footer2')
+    @include('components.footer')
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
