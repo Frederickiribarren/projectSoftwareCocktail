@@ -17,6 +17,10 @@ return new class extends Migration
             $table->string('email', 255)->unique();
             $table->string('password', 255);
             $table->enum('role', ["admin","professional","hobbyist"]);
+            $table->string('avatar')->nullable();
+            $table->text('bio')->nullable();
+            $table->json('preferences')->nullable();
+            $table->string('status')->default('active');
             $table->timestamp('created_at')->nullable()->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrent();
         });

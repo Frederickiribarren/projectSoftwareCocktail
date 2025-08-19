@@ -56,6 +56,10 @@
                     <i class="fas fa-cog"></i>
                     <span>Configuración</span>
                 </a>
+                <a href="{{ route('database.admin') }}" class="nav-link">
+                    <i class="fas fa-database"></i>
+                    <span>Administrar Base de Datos</span>
+                </a>
             </nav>
             <div class="sidebar-footer">
                 <a href="#" class="nav-link">

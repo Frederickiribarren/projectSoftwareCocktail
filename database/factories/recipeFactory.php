@@ -18,23 +18,18 @@ class recipeFactory extends Factory
     protected $model = recipe::class;
     public function definition(): array
     {
+        $isFromApi = $this->faker->boolean(30); // 30% de probabilidad de ser de una API
         
-        $source =[
-            'system',
-            'user_manual',
-            'user_ocr',
-            'user_ai_generated'
-        ];
         return [
             'name' => $this->faker->unique()->word(),
             'instructions' => $this->faker->sentence(),
-            'glass_type' => $this->faker->randomElement(['highball', 'lowball', 'martini', 'shot']),
+            'glass_type' => $this->faker->randomElement(['martini', 'highball', 'rocks', 'shot']),
             'garnish' => $this->faker->optional()->word(),
             'image_url' => $this->faker->imageUrl(),
-            'user_id' => User::factory(),
-            'source' => $this->faker->randomElement($source),
-            'is_private' => $this->faker->numberBetween(0, 1),
-            'source_api_id' => $this->faker->optional()->uuid(),
+            'user_id' => $isFromApi ? null : User::factory(),
+            'source' => $isFromApi ? 'system' : $this->faker->randomElement(['user_manual', 'user_ocr', 'user_ai_generated']),
+            'is_private' => $this->faker->boolean(),
+            'source_api_id' => $isFromApi ? 1 : null,  // 1 = TheCocktailDB, null = entrada manual
         ];
     }
 }

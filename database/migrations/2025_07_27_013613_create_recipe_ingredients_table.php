@@ -17,12 +17,14 @@ return new class extends Migration
         Schema::create('recipe_ingredients', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('recipe_id')->index();
-            $table->foreign('recipe_id')->references('id')->on('recipes');
+            $table->foreign('recipe_id')->references('id')->on('recipes')->onDelete('cascade');
             $table->unsignedBigInteger('ingredient_id')->index();
             $table->foreign('ingredient_id')->references('id')->on('ingredients');
             $table->decimal('amount', 8, 2);
             $table->string('unit', 50);
             $table->unique(['recipe_id', 'ingredient_id']);
+            $table->timestamp('created_at')->nullable()->useCurrent();
+            $table->timestamp('updated_at')->nullable()->useCurrent();
         });
 
         Schema::enableForeignKeyConstraints();
