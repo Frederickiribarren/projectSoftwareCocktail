@@ -1,154 +1,144 @@
-        /* Variables CSS importadas desde resetHtml.css */
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+    margin-top: 10vh; /* Espacio para el navbar fijo */
+}
 
-body {
-    color: var(--text-primary);
+.sidebar {
+    width: 260px;
+    background-color: var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    border-right: 1px solid var(--border-color);
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.logo-icon {
+    color: var(--accent-color);
+    font-size: 2rem;
+    margin-right: 1rem;
+}
+
+.logo-text {
+    font-family: var(--font-logo);
+    color: var(--accent-color);
+    font-size: 1.5rem;
+}
+
+.sidebar-nav {
+    flex-grow: 1;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s;
+    font-family: var(--font-navbar-footer);
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background-color: var(--background-card);
+    color: var(--accent-color);
+}
+
+.nav-link i {
+    font-size: 1.2rem;
+    margin-right: 1rem;
+    width: 20px;
+    text-align: center;
+}
+
+.sidebar-footer {
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.main-content {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.main-header {
+    margin-bottom: 2rem;
+    margin-top: 2rem; /* Espacio adicional desde el top */
+}
+
+.main-header h2 {
+    font-family: var(--font-h1-h2-h3);
+    font-size: 2.5rem;
+    color: var(--text-color);
+}
+
+.main-header p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
     font-family: var(--font-p);
 }
 
-.dashboard-container {
-            display: flex;
-            min-height: 100vh; 
-            margin-top: 10vh; /* Espacio para el navbar fijo */
-        }
+.dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
 
-       
-        .sidebar {
-            width: 260px;
-            background-color: var(--primary-color);
-            display: flex;
-            flex-direction: column;
-            padding: 1.5rem;
-            border-right: 1px solid var(--border-color);
-        }
+.card {
+    background-color: var(--background-card);
+    border-radius: 10px;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
 
-        .sidebar-header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid var(--border-color);
-        }
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
 
-        .logo-icon {
-            color: var(--accent-color);
-            font-size: 2rem;
-            margin-right: 1rem;
-        }
+.card-icon {
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    margin-right: 1.5rem;
+}
 
-        .logo-text {
-            font-family: var(--font-logo);
-            color: var(--accent-color);
-            font-size: 1.5rem;
-        }
+.card-body h3 {
+    font-family: var(--font-h1-h2-h3);
+    font-size: 1.5rem;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
 
-        .sidebar-nav {
-            flex-grow: 1;
-        }
+.card-body p {
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    font-family: var(--font-p);
+}
 
-        .nav-link {
-            display: flex;
-            align-items: center;
-            padding: 1rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-secondary);
-            text-decoration: none;
-            border-radius: 8px;
-            transition: background-color 0.3s, color 0.3s;
-            font-family: var(--font-navbar-footer);
-        }
+.card-link {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+    font-family: var(--font-navbar-footer);
+}
 
-        .nav-link:hover, .nav-link.active {
-            background-color: var(--background-card);
-            color: var(--accent-color);
-        }
-
-        .nav-link i {
-            font-size: 1.2rem;
-            margin-right: 1rem;
-            width: 20px;
-            text-align: center;
-        }
-
-        .sidebar-footer {
-            padding-top: 1rem;
-            border-top: 1px solid var(--border-color);
-        }
-
-
-        
-        .main-content {
-            flex: 1;
-            padding: 2rem;
-            overflow-y: auto;
-        }
-
-        .main-header {
-            margin-bottom: 2rem;
-            margin-top: 2rem; /* Espacio adicional desde el top */
-        }
-
-        .main-header h2 {
-            font-family: var(--font-h1-h2-h3);
-            font-size: 2.5rem;
-            color: var(--text-primary);
-        }
-
-        .main-header p {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            font-family: var(--font-p);
-        }
-
-        
-        .dashboard-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .card {
-            background-color: var(--background-card);
-            border-radius: 10px;
-            padding: 2rem;
-            display: flex;
-            align-items: center;
-            border: 1px solid var(--border-color);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-        }
-
-        .card-icon {
-            font-size: 2.5rem;
-            color: var(--accent-color);
-            margin-right: 1.5rem;
-        }
-
-        .card-body h3 {
-            font-family: var(--font-h1-h2-h3);
-            font-size: 1.5rem;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .card-body p {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            font-family: var(--font-p);
-        }
-
-        .card-link {
-            color: var(--accent-color);
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s;
-            font-family: var(--font-navbar-footer);
-        }
-
-        .card-link:hover {
-            color: var(--hover-color);
-        }
+.card-link:hover {
+    color: var(--hover-color);
+}

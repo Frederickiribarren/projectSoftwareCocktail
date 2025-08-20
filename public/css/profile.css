@@ -1,6 +1,6 @@
 body {
     background-color: var(--primary-color);
-    color: var(--text-primary);
+    color: var(--text-color);
     font-family: var(--font-p);
     margin: 0;
     padding: 0;
@@ -27,7 +27,7 @@ body {
 }
 
 .profile-header p {
-    color: var(--text-secondary);
+    color: var(--text-muted);
     font-size: 1.1rem;
 }
 
@@ -55,7 +55,7 @@ body {
 }
 
 .card-header p {
-    color: var(--text-secondary);
+    color: var(--text-muted);
     font-size: 0.95rem;
 }
 
@@ -66,7 +66,7 @@ body {
 .input-group label {
     display: block;
     margin-bottom: 0.5rem;
-    color: var(--text-primary);
+    color: var(--text-color);
 }
 
 .input-group input {
@@ -75,7 +75,7 @@ body {
     background-color: var(--background-dark);
     border: 1px solid var(--border-color);
     border-radius: 5px;
-    color: var(--text-primary);
+    color: var(--text-color);
     font-family: var(--font-p);
 }
 
@@ -101,30 +101,30 @@ body {
 }
 
 .danger-zone {
-    border-color: #ff4646;
+    border-color: var(--error-color);
 }
 
 .danger-zone .card-header h3 {
-    color: #ff4646;
+    color: var(--error-color);
 }
 
 .danger-button {
-    background-color: #ff4646;
-    color: white;
+    background-color: var(--error-color);
+    color: var(--background-light);
 }
 
 .danger-button:hover {
-    background-color: #ff3333;
+    background-color: var(--accent-dark);
 }
 
 .success-message {
-    color: #4CAF50;
+    color: var(--success-color);
     margin-top: 0.5rem;
     font-size: 0.9rem;
 }
 
 .error-message {
-    color: #ff4646;
+    color: var(--error-color);
     margin-top: 0.5rem;
     font-size: 0.9rem;
 }

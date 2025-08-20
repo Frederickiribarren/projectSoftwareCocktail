@@ -92,7 +92,7 @@ class DatabaseAdminController extends Controller
             ];
         }
 
-        return view('layouts.database-admin', ['tables' => $tablesInfo]);
+        return view('pages.database-admin', ['tables' => $tablesInfo]);
     }
 
     /**
@@ -128,7 +128,7 @@ class DatabaseAdminController extends Controller
             }
         }
 
-        return view('layouts.table-view', [
+        return view('pages.table-view', [
             'tableName' => ucfirst(str_replace('_', ' ', $table)),
             'records' => $records,
             'columns' => $columns,

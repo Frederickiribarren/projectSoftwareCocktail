@@ -30,7 +30,7 @@
 .types-preparation .type-img .type-title .type-title-preparation {
     font-family: var(--font-h1-h2-h3);
     font-size: 3rem;
-    color: var(--text-primary);
+    color: var(--text-color);
 }
 
 /*seccion de lista*/
@@ -48,7 +48,7 @@
 }
 
 .types-preparation .type-img .type-list .type-list-items .type-list-item {
-    color: var(--text-primary);
+    color: var(--text-color);
     font-size: 1.8rem;
     font-weight: bold;
     margin: 10px 0;

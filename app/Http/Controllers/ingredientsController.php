@@ -18,7 +18,7 @@ class IngredientsController extends Controller
         // Debug para verificar datos
         \Log::info('Ingredients:', ['data' => $ingredients->toArray()]);
         
-        return view('layouts.inventory', [
+        return view('pages.inventory', [
             'ingredients' => $ingredients,
             'userIngredients' => $user->ingredients()->pluck('ingredients.id')->toArray()
         ]);

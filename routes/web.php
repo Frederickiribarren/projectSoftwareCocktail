@@ -90,11 +90,11 @@ Route::get('/create', function () {
 })->middleware(['auth', 'verified'])->name('create');
 
 Route::get('/travel', function () {
-    return view('layouts.travel');
+    return view('pages.travel');
 })->middleware(['auth', 'verified'])->name('travel');
 
 Route::get('/inventory', function () {
-    return view('layouts.inventory');
+    return view('pages.inventory');
 })->name('inventory');
 
 // Rutas de administración de base de datos

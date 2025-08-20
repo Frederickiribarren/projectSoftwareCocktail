@@ -1,27 +1,9 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Explorar Recetas - Bar Biblioteca</title>
-    
-    <!-- Fuentes correctas del sistema -->
-    <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/bartender-and-cocktail">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet">
-    
-    <!-- Iconos y CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="{{ asset('css/resetHtml.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/recipes.css') }}"> 
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-</head>
-<body>
-    @include('components.navbar') 
+@extends('layouts.app')
+
+@section('title', 'Explorar Recetas - Bar Biblioteca')
+
+@section('content')
+    <link rel="stylesheet" href="{{ asset('css/recipes.css') }}">
 
     <div class="page-container"> 
         
@@ -43,36 +25,8 @@
             </section>
 
             
-            <section class="cocktail-gallery">
-                @foreach($recipes as $recipe)
-                <div class="cocktail-card">
-                    <img src="{{ asset('img/michelada.png') }}" alt="{{ $recipe->name }}" class="card-image">
-                    <div class="card-info">
-                        <h3 class="card-title">{{ $recipe->name }}</h3>
-                        <p class="card-description">{{ $recipe->instructions }}</p>
-                        <div class="card-actions">
-                            <a href="{{ route('show', $recipe->id) }}" class="card-link">Ver Receta &rarr;</a>
-                            <a href="{{ route('edit', $recipe->id) }}" class="btn-edit">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <form action="{{ route('recipes.destroy', $recipe->id) }}" method="POST" style="display: inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn-delete" onclick="return confirm('¿Estás seguro?')">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-            </section>
+           
         </main>
     </div>
-    
-    
-    @include('components.footer') 
 
-    
-</body>
-</html>
+@endsection

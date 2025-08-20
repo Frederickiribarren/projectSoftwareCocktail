@@ -1,29 +1,11 @@
 /* Variables CSS importadas desde resetHtml.css */
 
-body {
-    color: var(--text-primary);
-    font-family: var(--font-p);
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-    padding-top: 10vh; /* Espacio para el navbar fijo */
-}
-
-a {
-    color: var(--accent-color);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-a:hover {
-    color: var(--hover-color);
-}
 
 
 .page-container {
     display: flex; 
     min-height: 100vh; 
-    margin-top: 30px;
+    margin-top: 15vh;
 }
 
 
@@ -50,7 +32,7 @@ a:hover {
 
 .page-subtitle {
     font-size: 1.2rem;
-    color: var(--text-secondary);
+    color: var(--text-color);
     opacity: 0.8;
     font-family: var(--font-p);
 }
@@ -78,7 +60,7 @@ a:hover {
     padding: 1rem 1.5rem;
     border: none;
     background-color: transparent;
-    color: var(--text-primary);
+    color: var(--text-color);
     font-size: 1.1rem;
     outline: none;
     font-family: var(--font-p);
@@ -105,107 +87,6 @@ a:hover {
 }
 
 
-.cocktail-gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-    gap: 2rem; 
-    padding: 1rem;
-}
-
-.cocktail-gallery .cocktail-card {
-    background-color: var(--background-card2);
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid var(--border-color);
-}
-
-.cocktail-card:hover {
-    transform: translateY(-5px); 
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
-}
-
-.card-image {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    display: block;
-}
-
-.card-info {
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: 180px;
-}
-
-.card-title {
-    font-size: 1.8rem;
-    margin-top: 0;
-    margin-bottom: 0.8rem;
-    color: var(--accent-color);
-    font-family: var(--font-h1-h2-h3);
-}
-
-.card-description {
-    font-size: 0.95rem;
-    line-height: 1.5;
-    margin-bottom: 1.2rem;
-    opacity: 0.9;
-    color: var(--text-secondary);
-    font-family: var(--font-p);
-}
-
-.card-link {
-    display: inline-block;
-    background-color: var(--accent-color);
-    color: var(--primary-color);
-    padding: 0.8rem 1.5rem;
-    border-radius: 5px;
-    text-align: center;
-    font-weight: bold;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    margin-top: auto;
-    font-family: var(--font-navbar-footer);
-}
-
-.card-link:hover {
-    background-color: var(--hover-color);
-    color: var(--primary-color);
-}
-
-.card-actions {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 1rem;
-}
-
-.btn-edit, .btn-delete {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 5px 10px;
-    transition: color 0.3s ease;
-}
-
-.btn-edit {
-    color: #4a90e2;
-}
-
-.btn-delete {
-    color: #e74c3c;
-}
-
-.btn-edit:hover {
-    color: #357abd;
-}
-
-.btn-delete:hover {
-    color: #c0392b;
-}
 
 
 @media (max-width: 768px) {

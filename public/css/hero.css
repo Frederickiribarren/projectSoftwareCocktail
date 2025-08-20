@@ -50,7 +50,7 @@
 }
 
 #hero .slide .slide-content .hero-description {
-    color: var(--secondary-color);
+    color: var(--background-light);
     font-size: 1.2rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     text-align: left;
@@ -83,7 +83,7 @@
     font-family: var(--font-h1-h2-h3);
 }
 
-/* 📱 CLASES RESPONSIVAS - Agregar al final */
+/* CLASES RESPONSIVAS - Agregar al final */
 .hide-mobile {
     display: block;
 }
@@ -92,7 +92,7 @@
     display: none;
 }
 
-/* 📱 MEDIA QUERIES PARA MÓVILES */
+/* MEDIA QUERIES PARA MÓVILES */
 @media (max-width: 767px) {
     #hero .slide {
         padding-left: 20px;
@@ -110,7 +110,7 @@
         padding-top: 100px;
     }
 
-     /* 🚫 Ocultar descripción larga en móviles */
+     /* Ocultar descripción larga en móviles */
     #hero .slide .slide-content .hero-description.hide-mobile {
         display: none !important;
     }

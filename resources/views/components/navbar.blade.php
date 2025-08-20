@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
 <nav class="top-navbar">
     <div class="container-navbar">
         <div class="brand-container">
