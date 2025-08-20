@@ -10,7 +10,7 @@
             <div class="header-left">
                 <a href="{{ route('database.admin') }}" class="btn btn-outline">
                     <i class="fas fa-arrow-left"></i>
-                    Volver al Dashboard
+                    Volver
                 </a>
             </div>
             <h1 class="page-title">{{ $tableName }}</h1>
