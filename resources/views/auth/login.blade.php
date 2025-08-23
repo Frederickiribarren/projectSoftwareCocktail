@@ -1,22 +1,7 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Cocktail World</title>
-    
-    <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/bartender-and-cocktail">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="{{ asset('css/resetHtml.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+@extends('layouts.app')
 
+@section('content')
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
     <style>
         body {
             min-height: 100vh;
@@ -41,9 +26,6 @@
             z-index: -1;
         }
     </style>
-</head>
-<body>
-    @include('components.navbar')
     <main class="main-content">
         <div class="login-container">
             <div class="login-header">
@@ -89,11 +71,9 @@
             </form>
             
             <div class="register-section">
-                <p>¿No tienes una cuenta?</p>
+                <p class="register-p">¿No tienes una cuenta?</p>
                 <a href="{{ route('register') }}" class="register-link">Regístrate aquí</a>
             </div>
         </div>
     </main>
-    @include('components.footer')
-</body>
-</html>
+@endsection        

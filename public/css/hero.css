@@ -38,15 +38,15 @@
 }
 
 #hero .slide-1 {
-    background-image: url('../img/HERO1.png');
+    background-image: url('../img/hero1.png');
 }
 
 #hero .slide-2 {
-    background-image: url('../img/HERO.png');
+    background-image: url('../img/hero.png');
 }
 
 #hero .slide-3 {
-    background-image: url('../img/HERO3.png');
+    background-image: url('../img/hero3.png');
 }
 
 #hero .slide .slide-content .hero-description {

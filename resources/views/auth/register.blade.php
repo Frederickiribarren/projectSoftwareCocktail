@@ -1,24 +1,7 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro - Cocktail World</title>
-    
-    <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/bartender-and-cocktail">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="{{ asset('css/resetHtml.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
+@extends('layouts.app')
+
+@section('content')
     <link rel="stylesheet" href="{{ asset('css/register.css') }}">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-</head>
-<body>
-    @include('components.navbar')
     <main class="main-content">
         <div class="register-container">
             <div class="register-header">
@@ -73,6 +56,4 @@
             </div>
         </div>
     </main>
-    @include('components.footer')
-</body>
-</html>
+@endsection 
