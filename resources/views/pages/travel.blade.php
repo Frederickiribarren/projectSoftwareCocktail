@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-@title Modo Viaje - Optimiza tus Recetas
-
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/travel.css') }}">
     <div class="container">

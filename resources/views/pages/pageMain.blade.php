@@ -1,7 +1,4 @@
-
 @extends('layouts.app')
-
-@section('title', 'Cocktail World')
 
 @section('content')
     <link rel="stylesheet" href="{{ asset('css/hero.css') }}">

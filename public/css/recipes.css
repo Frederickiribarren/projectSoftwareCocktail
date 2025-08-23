@@ -1,11 +1,7 @@
-/* Variables CSS importadas desde resetHtml.css */
-
-
-
 .page-container {
     display: flex; 
     min-height: 100vh; 
-    margin-top: 15vh;
+    margin-top: 10vh;
 }
 
 

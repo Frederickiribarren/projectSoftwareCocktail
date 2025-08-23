@@ -142,3 +142,139 @@
 .card-link:hover {
     color: var(--hover-color);
 }
+
+/* ...existing code... */
+
+/* Estilos para badges de roles */
+.role-badge {
+    display: inline-block;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--border-radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    margin-right: var(--spacing-sm);
+}
+
+.role-badge.admin {
+    background: linear-gradient(135deg, var(--accent-color), var(--accent-dark));
+    color: var(--background-dark);
+}
+
+.role-badge.professional {
+    background: linear-gradient(135deg, var(--info-color), #1976d2);
+    color: var(--secondary-color);
+}
+
+.role-badge.hobbyist {
+    background: linear-gradient(135deg, var(--success-color), #2e7d32);
+    color: var(--secondary-color);
+}
+
+/* Estilos específicos para cards de roles */
+.card.admin-card {
+    border-left: 4px solid var(--accent-color);
+    background: linear-gradient(135deg, var(--background-card), rgba(255, 215, 0, 0.05));
+}
+
+.card.admin-card:hover {
+    box-shadow: var(--shadow-lg), 0 0 20px rgba(255, 215, 0, 0.2);
+    transform: translateY(-8px);
+}
+
+.card.professional-card {
+    border-left: 4px solid var(--info-color);
+    background: linear-gradient(135deg, var(--background-card), rgba(51, 181, 229, 0.05));
+}
+
+.card.professional-card:hover {
+    box-shadow: var(--shadow-lg), 0 0 20px rgba(51, 181, 229, 0.2);
+    transform: translateY(-8px);
+}
+
+/* Header mejorado */
+.header-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.user-info h2 {
+    margin-bottom: var(--spacing-xs);
+    color: var(--text-color);
+}
+
+.user-info p {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    color: var(--text-muted);
+}
+
+/* Estilos para badges de roles */
+.role-badge {
+    display: inline-block;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--border-radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    margin-right: var(--spacing-sm);
+}
+
+.role-badge.admin {
+    background: linear-gradient(135deg, var(--accent-color), var(--accent-dark));
+    color: var(--background-dark);
+}
+
+.role-badge.professional {
+    background: linear-gradient(135deg, var(--info-color), #1976d2);
+    color: var(--secondary-color);
+}
+
+.role-badge.hobbyist {
+    background: linear-gradient(135deg, var(--success-color), #2e7d32);
+    color: var(--secondary-color);
+}
+
+/* Estilos específicos para cards de roles */
+.card.admin-card {
+    border-left: 4px solid var(--accent-color);
+    background: linear-gradient(135deg, var(--background-card), rgba(255, 215, 0, 0.05));
+}
+
+.card.admin-card:hover {
+    box-shadow: var(--shadow-lg), 0 0 20px rgba(255, 215, 0, 0.2);
+    transform: translateY(-8px);
+}
+
+.card.professional-card {
+    border-left: 4px solid var(--info-color);
+    background: linear-gradient(135deg, var(--background-card), rgba(51, 181, 229, 0.05));
+}
+
+.card.professional-card:hover {
+    box-shadow: var(--shadow-lg), 0 0 20px rgba(51, 181, 229, 0.2);
+    transform: translateY(-8px);
+}
+
+/* Animaciones específicas para roles */
+.admin-card .card-icon {
+    background: linear-gradient(135deg, var(--accent-color), var(--accent-dark));
+}
+
+.professional-card .card-icon {
+    background: linear-gradient(135deg, var(--info-color), #1976d2);
+}
+
+/* Responsive para badges */
+@media (max-width: 768px) {
+    .user-info p {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-xs);
+    }
+    
+    .role-badge {
+        margin-right: 0;
+        margin-bottom: var(--spacing-xs);
+    }
+}

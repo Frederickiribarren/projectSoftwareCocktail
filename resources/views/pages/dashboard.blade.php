@@ -1,68 +1,53 @@
 @extends('layouts.app')
 
-@section('title', 'Dashboard - Bar Biblioteca')
-
 @section('content')
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
     <div class="dashboard-container">
-       <!-- <aside class="sidebar">
-            <div class="sidebar-header">
-                
-                <h1 class="logo-text">Cocktail World</h1>
-            </div>
-            <nav class="sidebar-nav">
-                <a href="{{ route('profile.edit') }}" class="nav-link">
-                    <i class="fas fa-user"></i>
-                    <span>Perfil</span>
-                </a>
-                <a href="{{ route('user_recipe_notes.index') }}" class="nav-link">
-                    <i class="fas fa-tachometer-alt"></i>
-                    <span>mis notas receta</span>
-                </a>
-                <a href="#" class="nav-link">
-                    <i class="fas fa-martini-glass-citrus"></i>
-                    <span>Mis Recetas</span>
-                </a>
-                <a href="{{ route('travel') }}" class="nav-link">
-                    <i class="fas fa-plane"></i>
-                    <span>Modo Viaje</span>
-                </a>
-                <a href="{{ route('inventory') }}" class="nav-link">
-                    <i class="fas fa-wine-bottle"></i>
-                    <span>Mi Bar</span>
-                </a>
-                <a href="#" class="nav-link">
-                    <i class="fas fa-cog"></i>
-                    <span>Configuración</span>
-                </a>
-                <a href="{{ route('database.admin') }}" class="nav-link">
-                    <i class="fas fa-database"></i>
-                    <span>Administrar Base de Datos</span>
-                </a>
-            </nav>
-            <div class="sidebar-footer">
-                <a href="#" class="nav-link">
-                    <i class="fas fa-sign-out-alt"></i>
-                    <span>Cerrar Sesión</span>
-                </a>
-            </div>
-        </aside>-->
         <main class="main-content">
             <header class="main-header">
-                <h2>Bienvenido, {{ Auth::user()->name }}</h2>
-                <p>Explora y administra tus creaciones.</p>
-            </header>
-            <section class="dashboard-cards">
-                <div class="card">
-                    <div class="card-icon">
-                        <i class="fas fa-martini-glass-citrus"></i>
-                    </div>
-                    <div class="card-body">
-                        <h3>Mis Recetas</h3>
-                        <p>Gestiona tu colección de cócteles favoritos y creados.</p>
-                        <a href="#" class="card-link">Ir a Mis Recetas &rarr;</a>
+                <div class="header-content">
+                    <div class="user-info">
+                        <h2>Bienvenido, {{ Auth::user()->name }}</h2>
+                        <p>
+                            @if(Auth::user()->isAdmin())
+                                <span class="role-badge admin">Administrador</span>
+                                Gestiona todo el sistema y usuarios.
+                            @elseif(Auth::user()->isProfessional())
+                                <span class="role-badge professional">Bartender Profesional</span>
+                                Herramientas avanzadas para profesionales.
+                            @else
+                                <span class="role-badge hobbyist">Entusiasta</span>
+                                Explora y crea tus cócteles favoritos.
+                            @endif
+                        </p>
                     </div>
                 </div>
+            </header>
+
+            <section class="dashboard-cards">
+                {{-- Tarjetas básicas para todos los roles --}}
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="card-body">
+                        <h3>Nueva Receta</h3>
+                        <p>Experimenta y crea nuevos tragos para añadir a tu colección</p>
+                        <a href="{{ route('create') }}" class="card-link">Crear Nueva Receta &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-sticky-note"></i>
+                    </div>
+                    <div class="card-body">
+                        <h3>Mis Notas</h3>
+                        <p>Guarda tus ideas y recetas en un solo lugar.</p>
+                        <a href="{{ route('user_recipe_notes.index') }}" class="card-link">Ver Mis Notas &rarr;</a>
+                    </div>
+                </div>
+
                 <div class="card">
                     <div class="card-icon">
                         <i class="fas fa-wine-bottle"></i>
@@ -73,57 +58,116 @@
                         <a href="{{ route('inventory') }}" class="card-link">Ir a Mi Bar &rarr;</a>
                     </div>
                 </div>
-                 <div class="card">
-                    <div class="card-icon">
-                        <i class="fas fa-plus"></i>
-                    </div>
-                    <div class="card-body">
-                        <h3>Nueva Receta</h3>
-                        <p>Experimenta y crea nuevos tragos para añadir a tu coleccion</p>
-                        <a href="{{ route('create') }}" class="card-link">Crear Nueva Receta &rarr;</a>
-                    </div>
-                </div>
+
                 <div class="card">
                     <div class="card-icon">
                         <i class="fas fa-plane"></i>
                     </div>
                     <div class="card-body">
-                        <h3>Modo Avión</h3>
+                        <h3>Modo Viaje</h3>
                         <p>Optimiza tus recetas según los ingredientes disponibles en tu destino.</p>
-                        <a href="{{ route('travel') }}" class="card-link">Ir a Modo Avión &rarr;</a>
+                        <a href="{{ route('travel') }}" class="card-link">Ir a Modo Viaje &rarr;</a>
                     </div>
                 </div>
+
+                {{-- Tarjetas específicas para Professional y Admin --}}
+                @if(Auth::user()->isProfessional() || Auth::user()->isAdmin())
+                    <div class="card professional-card">
+                        <div class="card-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="card-body">
+                            <h3>Análisis Profesional</h3>
+                            <p>Estadísticas avanzadas y métricas de tus recetas.</p>
+                            <a href="#" class="card-link">Ver Análisis &rarr;</a>
+                        </div>
+                    </div>
+
+                    <div class="card professional-card">
+                        <div class="card-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="card-body">
+                            <h3>Recetas Públicas</h3>
+                            <p>Explora y comparte recetas con la comunidad.</p>
+                            <a href="#" class="card-link">Ver Recetas Públicas &rarr;</a>
+                        </div>
+                    </div>
+                @endif
+
+                {{-- Tarjetas específicas para Hobbyist y superiores --}}
+                @unless(Auth::user()->isAdmin())
+                    <div class="card">
+                        <div class="card-icon">
+                            <i class="fas fa-martini-glass-citrus"></i>
+                        </div>
+                        <div class="card-body">
+                            <h3>Mis Recetas</h3>
+                            <p>Gestiona tu colección de cócteles favoritos y creados.</p>
+                            <a href="#" class="card-link">Ir a Mis Recetas &rarr;</a>
+                        </div>
+                    </div>
+                @endunless
+
+                {{-- Tarjetas solo para Admin --}}
+                @if(Auth::user()->isAdmin())
+                    <div class="card admin-card">
+                        <div class="card-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <div class="card-body">
+                            <h3>Base de Datos</h3>
+                            <p>Gestiona y organiza todas las recetas del sistema.</p>
+                            <a href="{{ route('database.admin') }}" class="card-link">Administrar BD &rarr;</a>
+                        </div>
+                    </div>
+
+                    <div class="card admin-card">
+                        <div class="card-icon">
+                            <i class="fas fa-users-cog"></i>
+                        </div>
+                        <div class="card-body">
+                            <h3>Gestión de Usuarios</h3>
+                            <p>Administra usuarios y sus permisos en el sistema.</p>
+                            <a href="#" class="card-link">Gestionar Usuarios &rarr;</a>
+                        </div>
+                    </div>
+
+                    <div class="card admin-card">
+                        <div class="card-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <div class="card-body">
+                            <h3>Configuración del Sistema</h3>
+                            <p>Configuraciones avanzadas y parámetros del sistema.</p>
+                            <a href="#" class="card-link">Configurar Sistema &rarr;</a>
+                        </div>
+                    </div>
+
+                    <div class="card admin-card">
+                        <div class="card-icon">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <div class="card-body">
+                            <h3>Reportes y Estadísticas</h3>
+                            <p>Análisis completo del uso del sistema y tendencias.</p>
+                            <a href="#" class="card-link">Ver Reportes &rarr;</a>
+                        </div>
+                    </div>
+                @endif
+
+                {{-- Tarjeta de configuración personal para todos --}}
                 <div class="card">
                     <div class="card-icon">
-                        <i class="fas fa-sticky-note"></i>
+                        <i class="fas fa-user-cog"></i>
                     </div>
                     <div class="card-body">
-                        <h3>Mis Notas</h3>
-                        <p>Guarda tus ideas y recetas en un solo lugar.</p>
-                        <a href="{{ route('user_recipe_notes.index') }}" class="card-link">Crear Nueva Nota &rarr;</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-icon">
-                        <i class="fas fa-cog"></i>
-                    </div>
-                    <div class="card-body">
-                        <h3>Configuración</h3>
+                        <h3>Mi Perfil</h3>
                         <p>Personaliza tu experiencia y preferencias.</p>
-                        <a href="#" class="card-link">Ir a Configuración &rarr;</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-icon">
-                        <i class="fas fa-database"></i>
-                    </div>
-                    <div class="card-body">
-                        <h3>Base de Datos</h3>
-                        <p>Gestiona y organiza tus recetas en la base de datos.</p>
-                        <a href="{{ route('database.admin') }}" class="card-link">Ir a Base de Datos &rarr;</a>
+                        <a href="{{ route('profile.edit') }}" class="card-link">Editar Perfil &rarr;</a>
                     </div>
                 </div>
             </section>
         </main>
-   </div>
+    </div>
 @endsection

@@ -1,0 +1,222 @@
+.container {
+    background: var(--background-dark);
+    color: var(--text-color);
+    padding: 2.5rem 1.2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 2px 24px rgba(0,0,0,0.18);
+    margin-top: 90px; /* Espacio para navbar fijo */
+}
+
+.title-acerca-de {
+    font-size: 2.8rem;
+    color: var(--accent-color);
+    margin-bottom: 2.2rem;
+    font-family: var(--font-h1-h2-h3);
+    margin-top: 0.5rem; /* Espacio extra por si el navbar es sticky */
+    text-align: center;
+}
+
+.content-acerca-de {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 2.5rem;
+    margin-bottom: 2.5rem;
+    margin-top: 70px;
+}
+
+.img-acerca-de {
+    background-image: url('/img/HERO.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    max-width: 400px;
+    height: 320px;
+    min-height: 180px;
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 2px 12px var(--shadow-md);
+    margin: 0 auto;
+    display: block;
+}
+
+@media (max-width: 900px) {
+    .img-acerca-de {
+        max-width: 90vw;
+        height: 180px;
+    }
+}
+
+@media (max-width: 600px) {
+    .img-acerca-de {
+        max-width: 100vw;
+        height: 120px;
+    }
+}
+
+.content-acerca-de-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    flex: 1;
+}
+
+.text-acerca-de {
+    font-size: 1.18rem;
+    color: var(--text-color);
+    font-family: var(--font-p);
+    margin-bottom: 0.5rem;
+    line-height: 1.7;
+    padding: 1rem 1.2rem;
+}
+
+.content-title-fundadores {
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.title-fundadores {
+    font-size: 2rem;
+    color: var(--accent-color);
+    font-family: var(--font-h1-h2-h3);
+}
+
+.content-fundadores {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+    justify-content: center;
+    margin-bottom: 2.5rem;
+}
+
+.card-fundador {
+    background: var(--background-card);
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 6px 32px var(--shadow-lg);
+    overflow: hidden;
+    width: 320px;
+    min-width: 220px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+    border: 2px solid var(--accent-dark);
+    position: relative;
+    margin-top: 30px;
+}
+
+.card-fundador::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 8px;
+    background: var(--gradient-accent);
+    border-top-left-radius: var(--border-radius-lg);
+    border-top-right-radius: var(--border-radius-lg);
+}
+
+.card-fundador:hover {
+    transform: translateY(-10px) scale(1.04);
+    box-shadow: 0 12px 40px var(--shadow-lg);
+    border-color: var(--accent-color);
+}
+
+/*Imagenes fundadores*/
+
+.img-frederick {
+    background-image: url('/img/frederickiribarren.jpg');
+}
+
+.img-fundador {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    margin-top: 2.2rem;
+    margin-bottom: 1.2rem;
+    border: 4px solid var(--accent-color);
+    box-shadow: 0 2px 12px var(--shadow-md);
+    display: block; 
+}
+
+.info-fundador {
+    padding: 1.7rem 1.2rem 2rem 1.2rem;
+    text-align: center;
+}
+
+.nombre-fundador {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+    font-family: var(--font-h1-h2-h3);
+    letter-spacing: 0.5px;
+}
+
+.rol-fundador {
+    font-size: 1.05rem;
+    color: var(--accent-dark);
+    margin-bottom: 0.5rem;
+    font-style: italic;
+    font-family: var(--font-p);
+}
+
+.desc-fundador {
+    font-size: 1.05rem;
+    color: var(--text-color);
+    opacity: 0.88;
+    margin-bottom: 0.5rem;
+    font-family: var(--font-p);
+    line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+    .content-acerca-de {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+    .img-acerca-de {
+        width: 90vw;
+        height: 220px;
+    }
+    .content-fundadores {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+    .container {
+        padding: 1.2rem 0.5rem;
+    }
+    .card-fundador {
+        width: 95vw;
+        min-width: 180px;
+    }
+}
+
+@media (max-width: 600px) {
+    .title-acerca-de {
+        font-size: 2rem;
+    }
+    .title-fundadores {
+        font-size: 1.3rem;
+    }
+    .img-acerca-de {
+        width: 100vw;
+        height: 120px;
+    }
+    .card-fundador {
+        width: 100vw;
+        min-width: 140px;
+    }
+    .img-fundador {
+        width: 70px;
+        height: 70px;
+    }
+}

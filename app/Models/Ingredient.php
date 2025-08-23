@@ -58,6 +58,14 @@ class Ingredient extends Model
     }
 
     /**
+     * Obtiene los usuarios que tienen este ingrediente en su inventario
+     */
+    public function users(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'user_ingredients');
+    }
+
+    /**
      * Obtiene las relaciones del modelo de manera no estática
      */
     public function getModelRelations()

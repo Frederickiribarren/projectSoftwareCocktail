@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name', 255);
             $table->string('email', 255)->unique();
             $table->string('password', 255);
-            $table->enum('role', ["admin","professional","hobbyist"]);
+            $table->enum('role', ["admin","professional","hobbyist"])->default('hobbyist');
             $table->string('avatar')->nullable();
             $table->text('bio')->nullable();
             $table->json('preferences')->nullable();

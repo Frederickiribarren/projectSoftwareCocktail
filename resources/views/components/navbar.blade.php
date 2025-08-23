@@ -9,27 +9,12 @@
         <div>
             <ul class="nav-links">
                 <li><a href="{{ route('inicio') }}" class="nav-link-main">Inicio</a></li>
-                <li class="dropdown">
-                    <a href="{{ route('recipes') }}" class="nav-link-main">Recetas</a>
-                    <div class="dropdown-content">
-                        <a href="" class="dropdown-link">Cócteles Clásicos</a>
-                        <a href="" class="dropdown-link">Cócteles Modernos</a>
-                        <a href="" class="dropdown-link">Sin Alcohol</a>
-                        <a href="" class="dropdown-link">Temporada</a>
-                    </div>
-                </li>
-                <li class="dropdown">
-                    <a href="" class="nav-link-main">Biblioteca</a>
-                    <div class="dropdown-content">
-                        <a href="{{ route('user_recipe_notes.index') }}" class="dropdown-link">Mis Notas de Recetas</a>
-                        <a href="{{ route('inventories.index') }}" class="dropdown-link">Libros de Cócteles</a>
-                        <a href="" class="dropdown-link">Utensilios de Bar</a>
-                        <a href="" class="dropdown-link">Ingredientes</a>
-                    </div>
-                </li>
-                <li><a href="" class="nav-link-main">Contacto</a></li>
+                <li><a href="{{ route('recipes.explore') }}" class="nav-link-main">Explorar Recetas</a></li>
+                <li><a href="" class="nav-link-main">Técnicas e utensilios</a></li>
+                <li><a href="{{ route('acerca-de') }}" class="nav-link-main">Acerca de</a></li>
                 @auth
                 <li><a href="{{ route('dashboard') }}" class="nav-link-main">Dashboard</a></li>
+                <li><a href="{{ route('recipes.index') }}" class="nav-link-main">Mis Recetas</a></li>
                 @endauth
             </ul>
         </div>
