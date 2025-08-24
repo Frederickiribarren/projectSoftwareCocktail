@@ -33,12 +33,15 @@ class RecipeSearchFilter {
     }
 
     async init() {
+        // Cargar estilos antes de cualquier renderizado
+        this.addModalStyles(); // Esto incluye estilos de paginación y modales
         console.log('🚀 Iniciando sistema de búsqueda de recetas...');
         this.setupEventListeners();
         await this.loadAllRecipes(); // Cargar TODAS las recetas de una vez
+        this.applySorting(); // Asegura ordenamiento antes de mostrar
         this.applyCurrentDisplay(); // Aplicar paginación visual
+        this.renderPagination(); // Renderizar paginación desde el inicio
         console.log('✅ Inicialización completa. Recetas cargadas:', this.allRecipes.length);
-        
         // Cargar opciones de filtros en segundo plano (no bloquea la UI)
         setTimeout(() => this.loadFilterOptions(), 100);
     }
@@ -366,6 +369,73 @@ class RecipeSearchFilter {
                 return true;
             });
             
+            // Eliminar duplicados por id antes de asignar a filteredRecipes
+            const uniqueFiltered = [];
+            const seenFilteredIds = new Set();
+            for (const recipe of this.allRecipes.filter(recipe => {
+                // Filtro por búsqueda (nombre)
+                if (this.currentFilters.search) {
+                    const searchTerm = this.currentFilters.search.toLowerCase();
+                    if (!recipe.name.toLowerCase().includes(searchTerm)) {
+                        return false;
+                    }
+                }
+                
+                // Filtro por categoría "sin-alcohol" (usando el campo alcoholic del backend)
+                if (this.currentFilters.category === 'sin-alcohol') {
+                    if (recipe.alcoholic !== 'non-alcoholic') {
+                        return false;
+                    }
+                } 
+                // Otros filtros de categoría se omiten por ahora ya que no tenemos ese campo en el backend
+                
+                // Filtro por ingrediente base (buscar en la lista de ingredientes)
+                if (this.currentFilters.base) {
+                    const base = this.currentFilters.base.toLowerCase();
+                    const hasIngredient = recipe.ingredients && recipe.ingredients.some(ing => {
+                        let ingName = '';
+                        if (typeof ing === 'string') {
+                            ingName = ing;
+                        } else if (ing && typeof ing === 'object' && ing.name) {
+                            ingName = ing.name;
+                        }
+                        // Permitir variantes usando includes
+                        return ingName && ingName.toLowerCase().includes(base);
+                    });
+                    if (!hasIngredient) {
+                        return false;
+                    }
+                }
+                
+                // Filtro por dificultad (usando el campo del backend)
+                if (this.currentFilters.difficulty && recipe.difficulty !== this.currentFilters.difficulty) {
+                    return false;
+                }
+                
+                // Filtro por tiempo (basado en número de ingredientes)
+                if (this.currentFilters.time) {
+                    const ingredientCount = recipe.ingredients ? recipe.ingredients.length : 0;
+                    switch (this.currentFilters.time) {
+                        case 'rapido':
+                            if (ingredientCount > 3) return false;
+                            break;
+                        case 'medio':
+                            if (ingredientCount <= 3 || ingredientCount > 6) return false;
+                            break;
+                        case 'largo':
+                            if (ingredientCount <= 6) return false;
+                            break;
+                    }
+                }
+                
+                return true;
+            })) {
+                if (!seenFilteredIds.has(recipe.id)) {
+                    uniqueFiltered.push(recipe);
+                    seenFilteredIds.add(recipe.id);
+                }
+            }
+            this.filteredRecipes = uniqueFiltered;
             console.log(`🎯 Filtros aplicados: ${this.allRecipes.length} → ${this.filteredRecipes.length} recetas`);
             
             // Aplicar ordenamiento
@@ -417,7 +487,7 @@ class RecipeSearchFilter {
         this.hideLoading();
         
         if (recipes.length === 0) {
-            grid.innerHTML = '';
+            grid.innerHTML = '<div class="no-recipes-message" style="grid-column: 1 / -1; text-align: center; padding: 3rem; color: #e74c3c; font-family: var(--font-p);"><i class="fas fa-search-minus" style="font-size: 3rem; margin-bottom: 1rem;"></i><h3 style="font-family: var(--font-h1-h2-h3);">No hay recetas con ese ingrediente</h3><p>Intenta con otro ingrediente base o limpia los filtros.</p></div>';
             if (noResults) noResults.style.display = 'block';
             return;
         }
@@ -425,7 +495,16 @@ class RecipeSearchFilter {
         if (noResults) noResults.style.display = 'none';
         
         // Usar innerHTML una sola vez para mejor rendimiento
-        const cardsHTML = recipes.map(recipe => this.createRecipeCardHTML(recipe)).join('');
+        // Eliminar recetas duplicadas por id antes de mostrar
+        const uniqueRecipes = [];
+        const seenIds = new Set();
+        for (const recipe of recipes) {
+            if (!seenIds.has(recipe.id)) {
+                uniqueRecipes.push(recipe);
+                seenIds.add(recipe.id);
+            }
+        }
+        const cardsHTML = uniqueRecipes.map(recipe => this.createRecipeCardHTML(recipe)).join('');
         grid.innerHTML = cardsHTML;
         
         // Agregar event listeners de una vez
@@ -834,8 +913,7 @@ class RecipeSearchFilter {
         
         // Renderizar y actualizar interfaz
         this.renderRecipes(this.displayedRecipes);
-        this.updateResultsCount(recipesToShow.length);
-        this.renderPagination();
+        this.renderPagination(); // Llamar directamente, no con setTimeout
     }
 
     // Ir a una página específica
