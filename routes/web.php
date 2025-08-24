@@ -6,6 +6,7 @@ use App\Http\Controllers\IngredientsController;
 use App\Http\Controllers\inventoriesController;
 use App\Http\Controllers\user_recipe_notesController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RecipeApiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DatabaseAdminController;
 use App\Http\Controllers\Admin\RecordController;
@@ -21,6 +22,15 @@ Route::get('/login', function () {
     return view('pages.ingreso');
 })->name('login');
 
+// API Routes para recetas
+Route::prefix('api')->group(function () {
+    Route::get('/recipes', [RecipeApiController::class, 'index'])->name('api.recipes.index');
+    Route::get('/recipes/featured', [RecipeApiController::class, 'featured'])->name('api.recipes.featured');
+    Route::get('/recipes/{id}', [RecipeApiController::class, 'show'])->name('api.recipes.show');
+    Route::get('/ingredients', [RecipeApiController::class, 'getIngredients'])->name('api.ingredients');
+    Route::get('/glass-types', [RecipeApiController::class, 'getGlassTypes'])->name('api.glass-types');
+});
+
 // Explorar recetas públicas
 Route::get('/explorar-recetas', function () {
     return view('pages.recipes');
@@ -30,6 +40,11 @@ Route::get('/explorar-recetas', function () {
 Route::get('/acerca-de', function () {
     return view('pages.acerca-de');
 })->name('acerca-de');
+
+// Página de prueba de API
+Route::get('/test-api', function () {
+    return view('test-api');
+})->name('test-api');
 
     
 

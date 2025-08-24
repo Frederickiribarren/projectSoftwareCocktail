@@ -9,7 +9,7 @@ class recipe extends Model
 {
     use HasFactory;
     
-    protected $fillable =[
+    protected $fillable = [
         'name',
         'instructions',
         'glass_type',
@@ -26,8 +26,14 @@ class recipe extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function recipeIngredients()
+    {
+        return $this->hasMany(RecipeIngredient::class);
+    }
+
     public function ingredients()
     {
-        return $this->hasMany(recipe_ingredients::class);
+        return $this->belongsToMany(Ingredient::class, 'recipe_ingredients')
+                    ->withPivot('amount', 'unit');
     }
 }

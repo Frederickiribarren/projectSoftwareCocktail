@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-@section('title', 'Editar Receta')
 
 @section('content')
 <div class="container mx-auto px-4 py-8">

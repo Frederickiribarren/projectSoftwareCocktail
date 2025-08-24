@@ -23,7 +23,7 @@ class RecipeIngredient extends Model
      */
     public function recipe()
     {
-        return $this->belongsTo(Recipe::class);
+        return $this->belongsTo(recipe::class);
     }
 
     /**

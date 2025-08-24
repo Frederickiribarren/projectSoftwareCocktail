@@ -25,6 +25,6 @@
             @yield('content')
         </main>
         @include('components.footer')
-        <script src="{{ asset('scripts/linea-navbar.js') }}"></script>
+        <script src="{{ asset('js/linea-navbar.js') }}"></script>
     </body>
 </html>
