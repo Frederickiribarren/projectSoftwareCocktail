@@ -14,7 +14,6 @@
                 <li><a href="{{ route('acerca-de') }}" class="nav-link-main">Acerca de</a></li>
                 @auth
                 <li><a href="{{ route('dashboard') }}" class="nav-link-main">Dashboard</a></li>
-                <li><a href="{{ route('recipes.index') }}" class="nav-link-main">Mis Recetas</a></li>
                 @endauth
             </ul>
         </div>
