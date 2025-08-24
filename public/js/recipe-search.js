@@ -326,9 +326,17 @@ class RecipeSearchFilter {
                 
                 // Filtro por ingrediente base (buscar en la lista de ingredientes)
                 if (this.currentFilters.base) {
-                    const hasIngredient = recipe.ingredients && recipe.ingredients.some(ing => 
-                        ing.name.toLowerCase().includes(this.currentFilters.base.toLowerCase())
-                    );
+                    const base = this.currentFilters.base.toLowerCase();
+                    const hasIngredient = recipe.ingredients && recipe.ingredients.some(ing => {
+                        let ingName = '';
+                        if (typeof ing === 'string') {
+                            ingName = ing;
+                        } else if (ing && typeof ing === 'object' && ing.name) {
+                            ingName = ing.name;
+                        }
+                        // Permitir variantes usando includes
+                        return ingName && ingName.toLowerCase().includes(base);
+                    });
                     if (!hasIngredient) {
                         return false;
                     }
@@ -817,7 +825,7 @@ class RecipeSearchFilter {
             this.currentDisplayPage = 1;
         }
         
-        // Obtener recetas para la página actual
+        // Obtener recetas para la página current
         const startIndex = (this.currentDisplayPage - 1) * this.itemsPerPage;
         const endIndex = startIndex + this.itemsPerPage;
         this.displayedRecipes = recipesToShow.slice(startIndex, endIndex);

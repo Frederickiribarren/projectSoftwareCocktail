@@ -38,13 +38,6 @@
                             <label class="filter-label">Ingrediente Base:</label>
                             <select id="baseFilter" class="filter-select">
                                 <option value="">Todos los ingredientes</option>
-                                <option value="ron">Ron</option>
-                                <option value="vodka">Vodka</option>
-                                <option value="whiskey">Whiskey</option>
-                                <option value="gin">Gin</option>
-                                <option value="tequila">Tequila</option>
-                                <option value="brandy">Brandy</option>
-                                <option value="licor">Licores</option>
                             </select>
                         </div>
 
