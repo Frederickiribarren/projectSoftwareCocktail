@@ -531,9 +531,8 @@ class RecipeSearchFilter {
                         </span>
                     </div>
                     <div class="recipe-extra-info">
-                            <small class="ingredient-count" style="color: var(--text-muted);">${recipe.ingredients.length} ingredientes</small>
-                            ${recipe.glass ? `<small class=\"glass-type\" style=\"color: var(--text-muted);\">Servir en: ${recipe.glass}</small>` : ''}
-                            ${recipe.author ? `<small class=\"recipe-author\" style=\"color: var(--text-muted);\">Por: ${recipe.author}</small>` : ''}
+                            <small class="ingredient-count" style="color: var(--text-muted); font-family: var(--font-p);">${recipe.ingredients.length} ingredientes</small>
+                            ${recipe.glass ? `<small class=\"glass-type\" style=\"color: var(--text-muted); font-family: var(--font-p);\">Servir en: ${recipe.glass}</small>` : ''}
                     </div>
                 </div>
             </div>
