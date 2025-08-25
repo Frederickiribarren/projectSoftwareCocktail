@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="{{ asset('css/inventory.css') }}">
     <div class="container">
         <div class="header">
-            <h1>Mis Inventarios</h1>
+            <h1>Mi Inventario</h1>
             <p>Gestiona tus ingredientes y descubre nuevas posibilidades para crear cócteles únicos.</p>
         </div>
 
