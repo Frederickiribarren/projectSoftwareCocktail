@@ -1,6 +1,6 @@
 # Project Software Cocktail
 
-![Version](https://img.shields.io/badge/version-v1.2.0-blue.svg)
+![Version](https://img.shields.io/badge/version-v1.3.0-blue.svg)
 ![Laravel](https://img.shields.io/badge/Laravel-10.x-red.svg)
 ![PHP](https://img.shields.io/badge/PHP-8.1+-777BB4.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
@@ -28,7 +28,15 @@ Este proyecto sigue el estándar de [Semantic Versioning](https://semver.org/) (
 - Cada versión incluye un changelog detallado
 
 ### Versión Actual: **v1.2.0** 
-*Última actualización: 20 de agosto de 2025*
+### Versión Actual: **v1.3.0** 
+*Última actualización: 1 de septiembre de 2025*
+
+#### Cambios v1.3.0 (merge develop → main)
+- Nuevos controladores y seeders
+- Mejoras de rendimiento (índices en BD)
+- Actualización de estilos y scripts (navbar, recetas, dashboard)
+- Nuevas vistas y componentes
+- Corrección de bugs y refactorización
 
 ## 📖 Descripción
 
