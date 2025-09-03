@@ -4,7 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\IngredientsController;
 use App\Http\Controllers\inventoriesController;
-use App\Http\Controllers\user_recipe_notesController;
+use App\Http\Controllers\UserRecipeNotesController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RecipeApiController;
 use Illuminate\Support\Facades\Route;
@@ -132,8 +132,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('recipes', RecipeController::class);
     
     // Notas personales
-    Route::resource('user_recipe_notes', user_recipe_notesController::class);
-    Route::get('/user_recipe_notes', [user_recipe_notesController::class, 'index'])->name('user_recipe_notes.index');
+    Route::resource('user_recipe_notes', UserRecipeNotesController::class);
+    Route::get('/user_recipe_notes', [UserRecipeNotesController::class, 'index'])->name('user_recipe_notes.index');
     
     // Inventarios
     Route::get('/inventories', [inventoriesController::class, 'index'])->name('inventories.index');
