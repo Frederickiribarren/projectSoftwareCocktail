@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class IngredientsController extends Controller
 {
+    
     public function inventory()
     {
         $user = auth()->user();
