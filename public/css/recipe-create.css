@@ -1,0 +1,118 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    margin-top: 12vh;
+    margin-bottom: 12vh;
+}
+
+.form-group {
+    margin-bottom: var(--spacing-lg);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    color: var(--text-color);
+    font-size: 0.9rem;
+    transition: color var(--transition-fast);
+}
+
+.form-control {
+    width: 100%;
+    padding: var(--spacing-md);
+    background: var(--background-card);
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    color: var(--text-color);
+    font-size: 1rem;
+    transition: all var(--transition-normal);
+}
+
+.form-control:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+    outline: none;
+}
+
+.form-control:hover {
+    border-color: var(--border-hover);
+}
+
+.ingredients-section {
+    background: var(--gradient-dark);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.ingredients-section h3 {
+    color: var(--accent-color);
+    margin-bottom: var(--spacing-md);
+}
+
+.ingredient-input {
+    background: var(--background-card);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    margin-bottom: var(--spacing-sm);
+}
+
+.btn {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: none;
+    border-radius: var(--border-radius-md);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.btn-primary {
+    background: var(--gradient-accent);
+    color: var(--primary-color);
+}
+
+.btn-secondary {
+    background: var(--background-card);
+    color: var(--text-color);
+    border: 2px solid var(--border-color);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
+}
+
+.btn-danger {
+    background: var(--error-color);
+    color: white;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+/* Estilos para los checkboxes */
+input[type="checkbox"] {
+    accent-color: var(--accent-color);
+}
+
+/* Estilos para los select */
+select.form-control {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23ffd700' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.7rem center;
+    background-size: 1.2em;
+    padding-right: 2.5rem;
+}

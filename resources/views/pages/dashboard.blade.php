@@ -33,10 +33,20 @@
                     <div class="card-body">
                         <h3>Nueva Receta</h3>
                         <p>Experimenta y crea nuevos tragos para añadir a tu colección</p>
-                        <a href="{{ route('create') }}" class="card-link">Crear Nueva Receta &rarr;</a>
+                        <a href="{{ route('user.recipes.create') }}" class="card-link">Crear Nueva Receta &rarr;</a>
                     </div>
-                </div>
 
+                </div>
+                    <div class="card">
+                        <div class="card-icon">
+                            <i class="fas fa-martini-glass-citrus"></i>
+                        </div>
+                        <div class="card-body">
+                            <h3>Mis Recetas</h3>
+                            <p>Gestiona tu colección de cócteles favoritos y creados.</p>
+                            <a href="{{ route('user.recipes.index') }}" class="card-link">Ir a Mis Recetas &rarr;</a>
+                        </div>
+                    </div>
                 <div class="card">
                     <div class="card-icon">
                         <i class="fas fa-sticky-note"></i>
@@ -96,18 +106,7 @@
                 @endif
 
                 {{-- Tarjetas específicas para Hobbyist y superiores --}}
-                @unless(Auth::user()->isAdmin())
-                    <div class="card">
-                        <div class="card-icon">
-                            <i class="fas fa-martini-glass-citrus"></i>
-                        </div>
-                        <div class="card-body">
-                            <h3>Mis Recetas</h3>
-                            <p>Gestiona tu colección de cócteles favoritos y creados.</p>
-                            <a href="#" class="card-link">Ir a Mis Recetas &rarr;</a>
-                        </div>
-                    </div>
-                @endunless
+
 
                 {{-- Tarjetas solo para Admin --}}
                 @if(Auth::user()->isAdmin())

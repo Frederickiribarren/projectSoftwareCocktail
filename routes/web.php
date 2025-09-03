@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DatabaseAdminController;
 use App\Http\Controllers\Admin\RecordController;
 use App\Http\Controllers\RecipeImportController;
+use App\Http\Controllers\UserRecipesController;
 
 
 // Rutas públicas
@@ -118,10 +119,10 @@ Route::middleware(['auth'])->group(function () {
         return view('pages.travel');
     })->name('travel');
 
-    // Creación de recetas
-    Route::get('/create', function () {
-        return view('recipes.create');
-    })->name('create');
+    // Rutas para las recetas
+    Route::resource('recipes', RecipeController::class);
+    Route::get('/my-recipes', [RecipeController::class, 'index'])->name('recipes.index');
+    Route::get('/create-recipe', [RecipeController::class, 'create'])->name('create');
     
     // Mostrar detalles de receta
     Route::get('/show', function () {
@@ -129,7 +130,21 @@ Route::middleware(['auth'])->group(function () {
     })->name('show');
     
     // Gestión de recetas personales
-    Route::resource('recipes', RecipeController::class);
+    Route::middleware(['auth'])->group(function () {
+        Route::prefix('user/recipes')->group(function () {
+            Route::get('/', [UserRecipesController::class, 'index'])->name('user.recipes.index');
+            Route::get('/create', [UserRecipesController::class, 'create'])->name('user.recipes.create');
+            Route::post('/', [UserRecipesController::class, 'store'])->name('user.recipes.store');
+            Route::get('/{recipe}', [UserRecipesController::class, 'show'])->name('user.recipes.show');
+            Route::get('/{recipe}/edit', [UserRecipesController::class, 'edit'])->name('user.recipes.edit');
+            Route::put('/{recipe}', [UserRecipesController::class, 'update'])->name('user.recipes.update');
+            Route::delete('/{recipe}', [UserRecipesController::class, 'destroy'])->name('user.recipes.destroy');
+        });
+    });
+    
+    // Detalle de receta para el usuario
+    Route::get('/user/recipes/{recipe}/detail', [UserRecipesController::class, 'getDetail'])
+         ->name('user.recipes.detail');
     
     // Notas personales
     Route::resource('user_recipe_notes', user_recipe_notesController::class);

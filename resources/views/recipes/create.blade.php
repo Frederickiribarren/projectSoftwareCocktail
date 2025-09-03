@@ -1,57 +1,115 @@
 @extends('layouts.app')
 
 @section('content')
+<link rel="stylesheet" href="{{ asset('css/recipe-create.css') }}">
 <div class="container mx-auto px-4 py-8">
-    <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-6">
-        <h2 class="text-2xl font-bold mb-6">Create New Recipe</h2>
+    <div class="max-w-2xl mx-auto">
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h1 class="text-2xl font-bold text-gray-800 mb-6">Crear Nueva Receta</h1>
+            
+            <form action="{{ route('recipes.store') }}" method="POST" class="space-y-4" id="recipeForm">
+                @csrf
+                
+                <div class="form-group">
+                    <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
+                        Nombre de la Receta *
+                    </label>
+                    <input type="text" id="name" name="name" class="form-control" required>
+                </div>
 
-        <form action="{{ route('recipes.store') }}" method="POST" class="space-y-4">
-            @csrf
+                <div class="form-group">
+                    <label for="glass_type" class="block text-sm font-medium text-gray-700 mb-2">
+                        Tipo de Copa *
+                    </label>
+                    <select id="glass_type" name="glass_type" class="form-control" required>
+                        <option value="">Selecciona un tipo de copa</option>
+                        <option value="highball">Highball</option>
+                        <option value="rocks">Rocks/Old Fashioned</option>
+                        <option value="martini">Martini</option>
+                        <option value="coupe">Coupe</option>
+                        <option value="shot">Shot</option>
+                        <option value="wine">Copa de Vino</option>
+                        <option value="other">Otro</option>
+                    </select>
+                </div>
 
-            <div>
-                <label for="name" class="block text-sm font-medium text-gray-700">Recipe Name</label>
-                <input type="text" name="name" id="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required>
-            </div>
+                <div class="ingredients-section mb-6">
+                    <h3 class="text-lg font-semibold mb-3">Ingredientes</h3>
+                    <div id="ingredientsList" class="space-y-3"></div>
+                    <button type="button" id="addIngredient" class="btn btn-outline mt-3">
+                        <i class="fas fa-plus"></i> Agregar Ingrediente
+                    </button>
+                </div>
 
-            <div>
-                <label for="instructions" class="block text-sm font-medium text-gray-700">Instructions</label>
-                <textarea name="instructions" id="instructions" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required></textarea>
-            </div>
+                <div class="form-group">
+                    <label for="instructions" class="block text-sm font-medium text-gray-700 mb-2">
+                        Instrucciones *
+                    </label>
+                    <textarea id="instructions" name="instructions" rows="4" class="form-control" required></textarea>
+                </div>
 
-            <div>
-                <label for="glass_type" class="block text-sm font-medium text-gray-700">Glass Type</label>
-                <input type="text" name="glass_type" id="glass_type" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required>
-            </div>
+                <div class="form-group">
+                    <label for="garnish" class="block text-sm font-medium text-gray-700 mb-2">
+                        Decoración
+                    </label>
+                    <input type="text" id="garnish" name="garnish" class="form-control">
+                </div>
 
-            <div>
-                <label for="garnish" class="block text-sm font-medium text-gray-700">Garnish</label>
-                <input type="text" name="garnish" id="garnish" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-            </div>
+                <div class="form-group">
+                    <label for="image_url" class="block text-sm font-medium text-gray-700 mb-2">
+                        URL de Imagen
+                    </label>
+                    <input type="url" id="image_url" name="image_url" class="form-control">
+                </div>
 
-            <div>
-                <label for="image_url" class="block text-sm font-medium text-gray-700">Image URL</label>
-                <input type="url" name="image_url" id="image_url" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-            </div>
+                <div class="flex items-center mb-4">
+                    <input type="checkbox" id="is_private" name="is_private" class="mr-2">
+                    <label for="is_private" class="text-sm text-gray-700">Mantener receta privada</label>
+                </div>
 
-            <div>
-                <label for="source" class="block text-sm font-medium text-gray-700">Source</label>
-                <input type="text" name="source" id="source" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-            </div>
-
-            <div class="flex items-center">
-                <input type="checkbox" name="is_private" id="is_private" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-offset-0 focus:ring-indigo-200 focus:ring-opacity-50">
-                <label for="is_private" class="ml-2 block text-sm text-gray-700">Private Recipe</label>
-            </div>
-
-            <div class="flex justify-end space-x-4">
-                <a href="{{ route('recipes.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-300 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-400 active:bg-gray-500 focus:outline-none focus:border-gray-500 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">
-                    Cancel
-                </a>
-                <button type="submit" class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 active:bg-indigo-800 focus:outline-none focus:border-indigo-900 focus:ring ring-indigo-300 disabled:opacity-25 transition ease-in-out duration-150">
-                    Create Recipe
-                </button>
-            </div>
-        </form>
+                <div class="flex justify-end space-x-4">
+                    <button type="button" onclick="history.back()" class="btn btn-secondary">
+                        <i class="fas fa-times"></i> Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Guardar Receta
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
-@endsection
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const ingredientsList = document.getElementById('ingredientsList');
+    const addIngredientBtn = document.getElementById('addIngredient');
+
+    function createIngredientInput() {
+        const ingredientDiv = document.createElement('div');
+        ingredientDiv.className = 'ingredient-input flex items-center space-x-2';
+        
+        ingredientDiv.innerHTML = `
+            <input type="text" name="ingredients[]" class="form-control flex-1" placeholder="Nombre del ingrediente" required>
+            <input type="text" name="amounts[]" class="form-control w-32" placeholder="Cantidad (ej: 30ml, 1oz)" required>
+            <button type="button" class="btn btn-danger remove-ingredient">
+                <i class="fas fa-trash"></i>
+            </button>
+        `;
+
+        ingredientDiv.querySelector('.remove-ingredient').addEventListener('click', function() {
+            ingredientDiv.remove();
+        });
+
+        return ingredientDiv;
+    }
+
+    addIngredientBtn.addEventListener('click', function() {
+        ingredientsList.appendChild(createIngredientInput());
+    });
+
+    // Agregar el primer ingrediente por defecto
+    ingredientsList.appendChild(createIngredientInput());
+});
+</script>
+
