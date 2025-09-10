@@ -131,6 +131,10 @@
     background-image: url('/img/frederickiribarren.jpg');
 }
 
+.img-Alejandro{
+    background-image: url('/img/alejandrogambin.jpg');
+}
+
 .img-fundador {
     background-size: cover;
     background-repeat: no-repeat;

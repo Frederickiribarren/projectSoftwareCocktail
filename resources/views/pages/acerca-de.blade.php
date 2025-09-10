@@ -34,7 +34,7 @@
                         <div class="info-fundador">
                             <h4 class="nombre-fundador">Alejandro Gambin</h4>
                             <p class="rol-fundador">Desarrollador & Programador</p>
-                            <p class="desc-fundador">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus ad vero, aut temporibus architecto error dolore, sed ex laboriosam tempore voluptatum qui necessitatibus voluptatem repellat consequuntur iste assumenda facilis! Reprehenderit!</p>
+                            <p class="desc-fundador">Estudiante de programación. Co-fundador y encargado del desarrollo enfocado en backend de Cocktail World.</p>
                         </div>
                     </div>
                     <div class="card-fundador">
