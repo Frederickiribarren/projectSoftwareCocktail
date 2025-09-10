@@ -41,15 +41,35 @@ class UserRecipesController extends Controller
             'garnish' => $validated['garnish'],
             'image_url' => $validated['image_url'],
             'user_id' => Auth::id(),
-            'is_private' => $request->has('is_private'),
+            'is_private' => $request->has('is_private') && $request->input('is_private') == '1',
         ]);
 
-        // Guardar ingredientes como texto por ahora
-        foreach($request->ingredients as $index => $ingredient) {
-            $recipe->recipe_ingredients()->create([
-                'ingredient_text' => $ingredient,
-                'amount' => $request->amounts[$index]
-            ]);
+        // Guardar ingredientes
+        foreach($request->ingredients as $index => $ingredientName) {
+            if (!empty($ingredientName)) {
+                // Buscar o crear el ingrediente
+                $ingredient = \App\Models\Ingredient::firstOrCreate([
+                    'name' => trim($ingredientName)
+                ], [
+                    'description' => '',
+                    'is_alcoholic' => false
+                ]);
+
+                // Parsear la cantidad y unidad del campo amount
+                $amountString = $request->amounts[$index];
+                $amount = (float) preg_replace('/[^0-9.]/', '', $amountString);
+                $unit = trim(preg_replace('/[0-9.]/', '', $amountString));
+                
+                if (empty($unit)) {
+                    $unit = 'ml'; // Unidad por defecto
+                }
+
+                $recipe->recipeIngredients()->create([
+                    'ingredient_id' => $ingredient->id,
+                    'amount' => $amount,
+                    'unit' => $unit
+                ]);
+            }
         }
 
         return redirect()->route('user.recipes.index')
@@ -92,7 +112,7 @@ class UserRecipesController extends Controller
             'glass_type' => $validated['glass_type'],
             'garnish' => $validated['garnish'],
             'image_url' => $validated['image_url'],
-            'is_private' => $request->has('is_private'),
+            'is_private' => $request->has('is_private') && $request->input('is_private') == '1',
         ]);
 
         return redirect()->route('user.recipes.index')

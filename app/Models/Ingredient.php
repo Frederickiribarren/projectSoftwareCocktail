@@ -14,13 +14,27 @@ class Ingredient extends Model
 
     protected $table = 'ingredients';
 
+    public $timestamps = false; // solo existe updated_at manual
+
     protected $fillable = [
         'name',
         'description',
+        'category',
+        'brand',
+        'type',
+        'unit',
         'is_alcoholic',
+        'alcohol_content',
         'parent_ingredient_id',
         'flavor_profile_tags',
+        'attributes',
         'source_api_id',
+    ];
+
+    protected $casts = [
+        'is_alcoholic' => 'boolean',
+        'flavor_profile_tags' => 'array',
+        'attributes' => 'array',
     ];
 
     /**
@@ -53,8 +67,7 @@ class Ingredient extends Model
     public function recipes(): BelongsToMany
     {
         return $this->belongsToMany(recipe::class, 'recipe_ingredients')
-                    ->withPivot(['amount', 'unit'])
-                    ->withTimestamps();
+                    ->withPivot(['amount','unit']);
     }
 
     /**
@@ -62,7 +75,9 @@ class Ingredient extends Model
      */
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'user_ingredients');
+        return $this->belongsToMany(User::class, 'user_ingredients')
+                    ->withPivot('quantity')
+                    ->withTimestamps();
     }
 
     /**

@@ -21,6 +21,10 @@ class recipe extends Model
         'source_api_id',
     ];
 
+    protected $casts = [
+        'is_private' => 'boolean',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

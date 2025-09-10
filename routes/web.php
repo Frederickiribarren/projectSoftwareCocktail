@@ -112,7 +112,10 @@ Route::middleware(['auth'])->group(function () {
     
     // Gestión personal
     Route::get('/inventory', [IngredientsController::class, 'inventory'])->name('inventory');
-    Route::post('/inventory/update', [IngredientsController::class, 'updateInventory'])->name('inventory.update');
+    Route::get('/inventory/ingredients', [IngredientsController::class, 'list'])->name('inventory.ingredients.list');
+    Route::post('/inventory/ingredients', [IngredientsController::class, 'store'])->name('inventory.ingredients.store');
+    Route::put('/inventory/ingredients/{ingredient}', [IngredientsController::class, 'update'])->name('inventory.ingredients.update');
+    Route::delete('/inventory/ingredients/{ingredient}', [IngredientsController::class, 'destroy'])->name('inventory.ingredients.destroy');
     
     // Modo viaje
     Route::get('/travel', function () {

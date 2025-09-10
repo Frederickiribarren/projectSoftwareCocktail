@@ -2,6 +2,7 @@
 
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/inventory.css') }}">
+<meta name="csrf-token" content="{{ csrf_token() }}">
     <div class="container">
         <div class="header">
             <h1>Mi Inventario</h1>
@@ -170,198 +171,178 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Estado global del inventario
+            // Estado simple
             let currentIngredients = [];
-            let activeFilters = {
-                category: 'all',
-                brand: '',
-                stock: '',
-                alcoholic: false,
-                search: ''
-            };
+            let activeFilters = { category:'all', brand:'', stock:'', alcoholic:false, search:'' };
+            let editingId = null; // id del ingrediente que se edita
 
-            // Funciones de filtrado
-            function filterIngredients() {
-                return currentIngredients.filter(ingredient => {
-                    const matchesCategory = activeFilters.category === 'all' || 
-                                         ingredient.category.toLowerCase() === activeFilters.category;
-                    const matchesBrand = !activeFilters.brand || 
-                                       ingredient.brand.toLowerCase().includes(activeFilters.brand.toLowerCase());
-                    const matchesStock = !activeFilters.stock || ingredient.status === activeFilters.stock;
-                    const matchesAlcoholic = !activeFilters.alcoholic || ingredient.isAlcoholic;
-                    const matchesSearch = !activeFilters.search || 
-                                       ingredient.name.toLowerCase().includes(activeFilters.search.toLowerCase());
+            const csrf = document.querySelector('meta[name="csrf-token"]').content;
+            const list = document.querySelector('.ingredient-list');
+            const template = document.getElementById('ingredient-template');
+            const modal = document.getElementById('ingredientModal');
+            const addIngredientBtn = document.getElementById('addIngredientBtn');
+            const closeModalBtn = modal.querySelector('.close-modal');
+            const form = document.getElementById('ingredientForm');
+            const modalTitle = modal.querySelector('h2');
 
-                    return matchesCategory && matchesBrand && matchesStock && matchesAlcoholic && matchesSearch;
+            // Campos
+            const fName = document.getElementById('ingredientName');
+            const fCategory = document.getElementById('ingredientCategory');
+            const fBrand = document.getElementById('ingredientBrand');
+            const fUnit = document.getElementById('ingredientUnit');
+            const fStock = document.getElementById('ingredientStock');
+            const fFlavors = document.getElementById('ingredientFlavors');
+            const fAlcoholic = document.getElementById('ingredientAlcoholic');
+
+            function getUnitAbbreviation(unit){ const map={unit:'unidades',ml:'mililitros',bottle:'botellas',can:'latas'}; return map[unit]||unit||''; }
+            function statusFrom(stock){ if(stock===0) return 'out'; if(stock<200) return 'low'; return 'ok'; }
+            function updateStockStatus(el, stock){ if(stock===0){el.textContent='Sin stock';el.className='stock-status out';} else if(stock<200){el.textContent='Bajo';el.className='stock-status low';} else {el.textContent='OK';el.className='stock-status ok';} }
+
+            function filterIngredients(){
+                return currentIngredients.filter(i=>{
+                    const c = activeFilters.category==='all' || (i.category||'').toLowerCase()===activeFilters.category;
+                    const b = !activeFilters.brand || (i.brand||'').toLowerCase().includes(activeFilters.brand.toLowerCase());
+                    const s = !activeFilters.stock || i.status===activeFilters.stock;
+                    const a = !activeFilters.alcoholic || !!i.isAlcoholic;
+                    const q = !activeFilters.search || i.name.toLowerCase().includes(activeFilters.search.toLowerCase());
+                    return c && b && s && a && q;
                 });
             }
 
-            function getUnitAbbreviation(unit) {
-                const units = {
-                    'unit': 'unidades',
-                    'ml': 'mililitros',
-                    'bottle': 'botellas',
-                    'can': 'latas'
-                };
-                return units[unit] || unit;
-            }
-
-            function updateIngredientList() {
-                const filteredIngredients = filterIngredients();
-                const list = document.querySelector('.ingredient-list');
+            function render(){
                 const header = list.querySelector('.ingredient-header');
-                list.innerHTML = '';
-                list.appendChild(header);
-
-                filteredIngredients.forEach(ingredient => {
-                    const template = document.getElementById('ingredient-template');
+                list.innerHTML='';
+                if(header) list.appendChild(header);
+                const data = filterIngredients();
+                if(!data.length){ const d=document.createElement('div'); d.style.padding='1rem'; d.textContent='No hay ingredientes.'; list.appendChild(d); return; }
+                data.forEach(ing=>{
                     const clone = document.importNode(template.content, true);
-                    
-                    clone.querySelector('.ingredient-name').textContent = ingredient.name;
-                    clone.querySelector('.ingredient-category').textContent = ingredient.category;
-                    clone.querySelector('.ingredient-brand').textContent = ingredient.brand;
-                    clone.querySelector('.quantity-input').value = ingredient.stock;
-                    clone.querySelector('.unit').textContent = getUnitAbbreviation(ingredient.unit);
+                    const row = clone.querySelector('.ingredient-item');
+                    row.dataset.id = ing.id;
+                    clone.querySelector('.ingredient-name').textContent = ing.name;
+                    clone.querySelector('.ingredient-category').textContent = ing.category || '-';
+                    clone.querySelector('.ingredient-brand').textContent = ing.brand || '-';
+                    const qtyInput = clone.querySelector('.quantity-input');
+                    qtyInput.value = ing.stock;
+                    clone.querySelector('.unit').textContent = getUnitAbbreviation(ing.unit);
+                    const tagsBox = clone.querySelector('.flavor-tags');
+                    (ing.flavors||[]).forEach(f=>{ if(!f) return; const s=document.createElement('span'); s.className='flavor-tag'; s.textContent=f; tagsBox.appendChild(s); });
+                    updateStockStatus(clone.querySelector('.stock-status'), ing.stock);
 
-                    const flavorTags = clone.querySelector('.flavor-tags');
-                    ingredient.flavors.forEach(flavor => {
-                        const tag = document.createElement('span');
-                        tag.className = 'flavor-tag';
-                        tag.textContent = flavor;
-                        flavorTags.appendChild(tag);
-                    });
+                    // Botones acciones
+                    const buttons = row.querySelectorAll('.ingredient-actions .btn');
+                    const editBtn = buttons[0];
+                    const deleteBtn = buttons[2];
+                    editBtn.addEventListener('click', ()=> startEdit(ing.id));
+                    deleteBtn.addEventListener('click', ()=> removeIngredient(ing.id));
 
-                    const stockStatus = clone.querySelector('.stock-status');
-                    updateStockStatus(stockStatus, ingredient.stock);
+                    // Cantidad +/-
+                    const dec = row.querySelector('.quantity-btn.decrease');
+                    const inc = row.querySelector('.quantity-btn.increase');
+                    dec.addEventListener('click', ()=> changeQty(ing.id, Math.max(0, parseInt(qtyInput.value)-1), qtyInput, row));
+                    inc.addEventListener('click', ()=> changeQty(ing.id, parseInt(qtyInput.value)+1, qtyInput, row));
+                    qtyInput.addEventListener('change', ()=> changeQty(ing.id, Math.max(0, parseInt(qtyInput.value)||0), qtyInput, row));
 
-                    // Añadir el ingrediente al DOM
                     list.appendChild(clone);
                 });
             }
 
-            function updateStockStatus(element, stock) {
-                if (stock === 0) {
-                    element.textContent = 'Sin stock';
-                    element.className = 'stock-status out';
-                } else if (stock < 200) {
-                    element.textContent = 'Bajo';
-                    element.className = 'stock-status low';
-                } else {
-                    element.textContent = 'OK';
-                    element.className = 'stock-status';
-                }
+            function openModal(edit=false){ if(!edit){ editingId=null; form.reset(); modalTitle.textContent='Agregar Ingrediente'; } modal.classList.add('active'); }
+            function closeModal(){ modal.classList.remove('active'); form.reset(); editingId=null; }
+            window.closeModal = closeModal; // para botón Cancelar inline
+
+            function startEdit(id){
+                const ing = currentIngredients.find(i=>i.id===id);
+                if(!ing) return;
+                editingId = id;
+                modalTitle.textContent='Editar Ingrediente';
+                fName.value = ing.name;
+                fCategory.value = ing.category || 'others';
+                fBrand.value = ing.brand || '';
+                fUnit.value = ing.unit || 'unit';
+                fStock.value = ing.stock || 0;
+                fFlavors.value = (ing.flavors||[]).join(', ');
+                fAlcoholic.checked = !!ing.isAlcoholic;
+                openModal(true);
             }
 
-            // Event Listeners
-            document.querySelectorAll('.category-tab').forEach(tab => {
-                tab.addEventListener('click', () => {
-                    document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+            // ----- API sencillas -----
+            function api(url, method='GET', body=null){
+                return fetch(url, {
+                    method,
+                    headers:{'X-CSRF-TOKEN':csrf,'Accept':'application/json','Content-Type':'application/json'},
+                    body: body?JSON.stringify(body):null
+                }).then(async r=>{ if(!r.ok){ let m='Error'; try{const j=await r.json(); m=j.message||m;}catch{} alert(m); throw new Error(m);} return r.status===204?null:r.json(); });
+            }
+            function load(){ api('/inventory/ingredients').then(data=>{
+                currentIngredients = data.map(d=>({
+                    id:d.id,
+                    name:d.name,
+                    category:d.category,
+                    brand:d.brand,
+                    unit:d.unit,
+                    stock:d.stock,
+                    flavors:d.flavors||[],
+                    isAlcoholic:d.is_alcoholic,
+                    status: statusFrom(d.stock)
+                }));
+                render();
+            }); }
+            function saveNew(payload){ return api('/inventory/ingredients','POST',payload); }
+            function saveUpdate(id,payload){ return api('/inventory/ingredients/'+id,'PUT',payload); }
+            function saveDelete(id){ return api('/inventory/ingredients/'+id,'DELETE'); }
+
+            function changeQty(id,newQty,input,row){
+                const ing = currentIngredients.find(i=>i.id===id); if(!ing) return;
+                input.value = newQty;
+                ing.stock = newQty;
+                ing.status = statusFrom(newQty);
+                updateStockStatus(row.querySelector('.stock-status'), newQty);
+                saveUpdate(id,{stock:newQty});
+            }
+            function removeIngredient(id){ if(!confirm('¿Eliminar ingrediente?')) return; saveDelete(id).then(()=>{ currentIngredients = currentIngredients.filter(i=>i.id!==id); render(); }); }
+
+            // Submit form (crear / editar)
+            form.addEventListener('submit', function(e){
+                e.preventDefault();
+                const payload = {
+                    name: fName.value.trim(),
+                    category: fCategory.value,
+                    brand: fBrand.value.trim()||null,
+                    unit: fUnit.value,
+                    stock: parseInt(fStock.value)||0,
+                    flavors: fFlavors.value.split(',').map(v=>v.trim()).filter(v=>v.length),
+                    is_alcoholic: fAlcoholic.checked?1:0,
+                    description: null
+                };
+                if(editingId){
+                    saveUpdate(editingId,payload).then(()=>{ closeModal(); load(); });
+                } else {
+                    saveNew(payload).then(()=>{ closeModal(); load(); });
+                }
+            });
+
+            // Filtros
+            document.querySelectorAll('.category-tab').forEach(tab=>{
+                tab.addEventListener('click', ()=>{
+                    document.querySelectorAll('.category-tab').forEach(t=>t.classList.remove('active'));
                     tab.classList.add('active');
                     activeFilters.category = tab.dataset.category;
-                    updateIngredientList();
+                    render();
                 });
             });
+            document.getElementById('brandFilter').addEventListener('change', e=>{ activeFilters.brand=e.target.value; render(); });
+            document.getElementById('stockFilter').addEventListener('change', e=>{ activeFilters.stock=e.target.value; render(); });
+            document.getElementById('alcoholicFilter').addEventListener('change', e=>{ activeFilters.alcoholic=e.target.checked; render(); });
+            document.getElementById('searchInput').addEventListener('input', e=>{ activeFilters.search=e.target.value; render(); });
 
-            document.getElementById('brandFilter').addEventListener('change', function() {
-                activeFilters.brand = this.value;
-                updateIngredientList();
-            });
-
-            document.getElementById('stockFilter').addEventListener('change', function() {
-                activeFilters.stock = this.value;
-                updateIngredientList();
-            });
-
-            document.getElementById('alcoholicFilter').addEventListener('change', function() {
-                activeFilters.alcoholic = this.checked;
-                updateIngredientList();
-            });
-
-            document.getElementById('searchInput').addEventListener('input', function() {
-                activeFilters.search = this.value;
-                updateIngredientList();
-            });
-
-            // Control de cantidad
-            document.addEventListener('click', function(e) {
-                if (e.target.classList.contains('quantity-btn')) {
-                    const input = e.target.closest('.quantity-control').querySelector('.quantity-input');
-                    const currentValue = parseInt(input.value) || 0;
-                    const step = 1; // Ahora incrementamos de uno en uno
-                    
-                    if (e.target.classList.contains('increase')) {
-                        input.value = currentValue + step;
-                    } else if (e.target.classList.contains('decrease')) {
-                        input.value = Math.max(0, currentValue - step);
-                    }
-
-                    const stockStatus = e.target.closest('.stock-control').querySelector('.stock-status');
-                    updateStockStatus(stockStatus, parseInt(input.value));
-                }
-            });
-
-            // Modal de ingredientes
-            const modal = document.getElementById('ingredientModal');
-            const addIngredientBtn = document.getElementById('addIngredientBtn');
-            const closeModalBtn = modal.querySelector('.close-modal');
-            
-            function openModal() {
-                modal.classList.add('active');
-            }
-
-            function closeModal() {
-                modal.classList.remove('active');
-                document.getElementById('ingredientForm').reset();
-            }
-
-            addIngredientBtn.addEventListener('click', openModal);
+            // Modal eventos
+            addIngredientBtn.addEventListener('click', ()=> openModal(false));
             closeModalBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', e=>{ if(e.target===modal) closeModal(); });
 
-            document.getElementById('ingredientForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                const unit = document.getElementById('ingredientUnit').value;
-                const newIngredient = {
-                    name: document.getElementById('ingredientName').value,
-                    category: document.getElementById('ingredientCategory').value,
-                    brand: document.getElementById('ingredientBrand').value,
-                    stock: parseInt(document.getElementById('ingredientStock').value) || 0,
-                    unit: unit,
-                    flavors: document.getElementById('ingredientFlavors').value.split(',').map(f => f.trim()),
-                    isAlcoholic: document.getElementById('ingredientAlcoholic').checked,
-                    status: 'ok'
-                };
-
-                currentIngredients.push(newIngredient);
-                updateIngredientList();
-                closeModal();
-            });
-
-            // Inicialización
-            // Aquí normalmente cargarías los ingredientes desde el backend
-            currentIngredients = [
-                {
-                    name: "Gin Hendrick's",
-                    category: "Spirits",
-                    brand: "Hendrick's",
-                    stock: 2,
-                    unit: 'bottle',
-                    flavors: ["Pepino", "Rosa"],
-                    isAlcoholic: true,
-                    status: 'ok'
-                },
-                {
-                    name: "Tónica Fever-Tree",
-                    category: "Mixers",
-                    brand: "Fever-Tree",
-                    stock: 6,
-                    unit: 'unit',
-                    flavors: ["Cítrico", "Quinina"],
-                    isAlcoholic: false,
-                    status: 'low'
-                }
-            ];
-
-            updateIngredientList();
+            // Carga inicial
+            load();
         });
     </script>
 @endsection
