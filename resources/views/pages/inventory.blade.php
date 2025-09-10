@@ -171,7 +171,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Estado simple
+            // estado simple
             let currentIngredients = [];
             let activeFilters = { category:'all', brand:'', stock:'', alcoholic:false, search:'' };
             let editingId = null; // id del ingrediente que se edita
@@ -185,7 +185,7 @@
             const form = document.getElementById('ingredientForm');
             const modalTitle = modal.querySelector('h2');
 
-            // Campos
+            // campos
             const fName = document.getElementById('ingredientName');
             const fCategory = document.getElementById('ingredientCategory');
             const fBrand = document.getElementById('ingredientBrand');
@@ -229,14 +229,14 @@
                     (ing.flavors||[]).forEach(f=>{ if(!f) return; const s=document.createElement('span'); s.className='flavor-tag'; s.textContent=f; tagsBox.appendChild(s); });
                     updateStockStatus(clone.querySelector('.stock-status'), ing.stock);
 
-                    // Botones acciones
+                    // botones 
                     const buttons = row.querySelectorAll('.ingredient-actions .btn');
                     const editBtn = buttons[0];
                     const deleteBtn = buttons[2];
                     editBtn.addEventListener('click', ()=> startEdit(ing.id));
                     deleteBtn.addEventListener('click', ()=> removeIngredient(ing.id));
 
-                    // Cantidad +/-
+                    // cantidad (lo que falta por funcionar)
                     const dec = row.querySelector('.quantity-btn.decrease');
                     const inc = row.querySelector('.quantity-btn.increase');
                     dec.addEventListener('click', ()=> changeQty(ing.id, Math.max(0, parseInt(qtyInput.value)-1), qtyInput, row));
@@ -249,21 +249,20 @@
 
             function openModal(edit=false){ if(!edit){ editingId=null; form.reset(); modalTitle.textContent='Agregar Ingrediente'; } modal.classList.add('active'); }
             function closeModal(){ modal.classList.remove('active'); form.reset(); editingId=null; }
-            window.closeModal = closeModal; // para botón Cancelar inline
+            window.closeModal = closeModal;
 
             function startEdit(id){
-                const ing = currentIngredients.find(i=>i.id===id);
-                if(!ing) return;
+                const ing = currentIngredients.find(i=>i.id===id); if(!ing) return;
+                if(!ing.isPrivate){ // impedir edición de campos base si no es privado
+                    fName.disabled = true; fCategory.disabled = true; fBrand.disabled = true; fUnit.disabled = true; fFlavors.disabled = true; fAlcoholic.disabled = true;
+                } else {
+                    fName.disabled = false; fCategory.disabled = false; fBrand.disabled = false; fUnit.disabled = false; fFlavors.disabled = false; fAlcoholic.disabled = false;
+                }
                 editingId = id;
                 modalTitle.textContent='Editar Ingrediente';
-                fName.value = ing.name;
-                fCategory.value = ing.category || 'others';
-                fBrand.value = ing.brand || '';
-                fUnit.value = ing.unit || 'unit';
-                fStock.value = ing.stock || 0;
-                fFlavors.value = (ing.flavors||[]).join(', ');
-                fAlcoholic.checked = !!ing.isAlcoholic;
-                openModal(true);
+                fName.value = ing.name; fCategory.value = ing.category || 'others'; fBrand.value = ing.brand || '';
+                fUnit.value = ing.unit || 'unit'; fStock.value = ing.stock || 0; fFlavors.value = (ing.flavors||[]).join(', ');
+                fAlcoholic.checked = !!ing.isAlcoholic; openModal(true);
             }
 
             // ----- API sencillas -----
@@ -276,15 +275,8 @@
             }
             function load(){ api('/inventory/ingredients').then(data=>{
                 currentIngredients = data.map(d=>({
-                    id:d.id,
-                    name:d.name,
-                    category:d.category,
-                    brand:d.brand,
-                    unit:d.unit,
-                    stock:d.stock,
-                    flavors:d.flavors||[],
-                    isAlcoholic:d.is_alcoholic,
-                    status: statusFrom(d.stock)
+                    id:d.id,name:d.name,category:d.category,brand:d.brand,unit:d.unit,stock:d.stock,
+                    flavors:d.flavors||[],isAlcoholic:d.is_alcoholic,status: statusFrom(d.stock),isPrivate: d.is_private
                 }));
                 render();
             }); }
@@ -302,27 +294,28 @@
             }
             function removeIngredient(id){ if(!confirm('¿Eliminar ingrediente?')) return; saveDelete(id).then(()=>{ currentIngredients = currentIngredients.filter(i=>i.id!==id); render(); }); }
 
-            // Submit form (crear / editar)
+            // submit del formulario
             form.addEventListener('submit', function(e){
                 e.preventDefault();
-                const payload = {
-                    name: fName.value.trim(),
-                    category: fCategory.value,
-                    brand: fBrand.value.trim()||null,
-                    unit: fUnit.value,
-                    stock: parseInt(fStock.value)||0,
-                    flavors: fFlavors.value.split(',').map(v=>v.trim()).filter(v=>v.length),
-                    is_alcoholic: fAlcoholic.checked?1:0,
-                    description: null
-                };
-                if(editingId){
-                    saveUpdate(editingId,payload).then(()=>{ closeModal(); load(); });
+                const payload = { stock: parseInt(fStock.value)||0 };
+                // Solo enviar campos base si es creación nueva o ingrediente privado
+                if(!editingId){
+                    payload.name = fName.value.trim();
+                    payload.category = fCategory.value; payload.brand = fBrand.value.trim()||null;
+                    payload.unit = fUnit.value; payload.flavors = fFlavors.value.split(',').map(v=>v.trim()).filter(v=>v.length);
+                    payload.is_alcoholic = fAlcoholic.checked?1:0; payload.description = null;
                 } else {
-                    saveNew(payload).then(()=>{ closeModal(); load(); });
+                    const ing = currentIngredients.find(i=>i.id===editingId);
+                    if(ing && ing.isPrivate){
+                        payload.name = fName.value.trim(); payload.category = fCategory.value; payload.brand = fBrand.value.trim()||null;
+                        payload.unit = fUnit.value; payload.flavors = fFlavors.value.split(',').map(v=>v.trim()).filter(v=>v.length);
+                        payload.is_alcoholic = fAlcoholic.checked?1:0; payload.description = null;
+                    }
                 }
+                (editingId? saveUpdate(editingId,payload): saveNew(payload)).then(()=>{ closeModal(); load(); });
             });
 
-            // Filtros
+            // filtros
             document.querySelectorAll('.category-tab').forEach(tab=>{
                 tab.addEventListener('click', ()=>{
                     document.querySelectorAll('.category-tab').forEach(t=>t.classList.remove('active'));
@@ -336,12 +329,12 @@
             document.getElementById('alcoholicFilter').addEventListener('change', e=>{ activeFilters.alcoholic=e.target.checked; render(); });
             document.getElementById('searchInput').addEventListener('input', e=>{ activeFilters.search=e.target.value; render(); });
 
-            // Modal eventos
+            // modal eventos
             addIngredientBtn.addEventListener('click', ()=> openModal(false));
             closeModalBtn.addEventListener('click', closeModal);
             modal.addEventListener('click', e=>{ if(e.target===modal) closeModal(); });
 
-            // Carga inicial
+            // carga inicial
             load();
         });
     </script>

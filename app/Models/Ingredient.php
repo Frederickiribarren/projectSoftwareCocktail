@@ -29,6 +29,7 @@ class Ingredient extends Model
         'flavor_profile_tags',
         'attributes',
         'source_api_id',
+        'user_id', // agregado para ingredientes privados del usuario
     ];
 
     protected $casts = [
@@ -36,6 +37,12 @@ class Ingredient extends Model
         'flavor_profile_tags' => 'array',
         'attributes' => 'array',
     ];
+
+    // Relación al usuario dueño (nullable => ingredientes globales)
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 
     /**
      * Obtiene la API fuente de este ingrediente

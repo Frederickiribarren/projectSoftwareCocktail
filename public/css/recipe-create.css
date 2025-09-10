@@ -206,5 +206,5 @@ select.form-control {
   .recipe-form-card { padding: 1.6rem 1.2rem 2rem; }
   .recipe-form-title { font-size: 1.7rem; margin-bottom: 1.25rem; }
 }
-/* Eliminamos estilos previos de recipe-page-title para evitar conflictos */
+
 .recipe-page-title { color: var(--accent-color,#ffd700); font-size: 0; }
