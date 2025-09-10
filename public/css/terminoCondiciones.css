@@ -1,0 +1,167 @@
+/* Estilos para la página de Términos y Condiciones */
+.terms-conditions-container {
+    min-height: 100vh;
+    background: var(--primary-color);
+    padding: 2rem 0;
+    margin-top: 10vh;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.terms-content {
+    background: var(--background-card);
+    border-radius: 20px;
+    padding: 3rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.terms-title {
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    text-align: center;
+    margin-bottom: 0.5rem;
+    font-family: var(--font-h1-h2-h3);
+}
+
+.last-updated {
+    text-align: center;
+    color: var(--text-muted);
+    margin-bottom: 3rem;
+    font-style: italic;
+    font-family: var(--font-p);
+}
+
+.terms-section {
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+}
+
+.terms-section h2 {
+    color: var(--accent-color);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid rgba(0, 255, 255, 0.3);
+    padding-bottom: 0.5rem;
+    font-family: var(--font-h1-h2-h3);
+}
+
+.terms-section h3 {
+    color: var(--hover-color);
+    font-size: 1.2rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.8rem;
+    font-family: var(--font-h1-h2-h3);
+}
+
+.terms-section p {
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    text-align: justify;
+    font-family: var(--font-p);
+}
+
+.terms-section ul, .terms-section ol {
+    color: var(--text-color);
+    padding-left: 2rem;
+    margin-bottom: 1rem;
+}
+
+.terms-section li {
+    margin-bottom: 0.5rem;
+    font-family: var(--font-p);
+}
+
+.terms-section li strong {
+    color: var(--accent-color);
+}
+
+.warning-box {
+    background: linear-gradient(135deg, rgba(255, 193, 7, 0.2), rgba(255, 87, 51, 0.1));
+    border: 2px solid #ffc107;
+    border-radius: 15px;
+    padding: 2rem;
+    margin: 2rem 0;
+}
+
+.warning-box h3 {
+    color: #ffc107;
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.3rem;
+}
+
+.warning-box ul {
+    margin-bottom: 0;
+}
+
+.warning-box li {
+    color: var(--text-color);
+    margin-bottom: 0.8rem;
+}
+
+.contact-info {
+    background: rgba(0, 255, 255, 0.1);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border-left: 4px solid var(--accent-color);
+    margin-top: 1rem;
+}
+
+.contact-info p {
+    margin-bottom: 0.5rem;
+    font-family: var(--font-p);
+}
+
+.agreement {
+    background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    padding: 2rem;
+    border-radius: 15px;
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    text-align: center;
+}
+
+.agreement h2 {
+    border: none;
+    margin-bottom: 1rem;
+}
+
+.agreement ul {
+    text-align: left;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.link-accent {
+    color: var(--accent-color);
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.link-accent:hover {
+    color: var(--hover-color);
+}
+
+@media (max-width: 768px) {
+    .terms-content {
+        padding: 2rem 1.5rem;
+    }
+    
+    .terms-title {
+        font-size: 2rem;
+    }
+    
+    .terms-section ul, .terms-section ol {
+        padding-left: 1.5rem;
+    }
+    
+    .warning-box {
+        padding: 1.5rem;
+    }
+}

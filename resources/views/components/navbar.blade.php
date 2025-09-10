@@ -10,7 +10,7 @@
             <ul class="nav-links">
                 <li><a href="{{ route('inicio') }}" class="nav-link-main">Inicio</a></li>
                 <li><a href="{{ route('recipes.explore') }}" class="nav-link-main">Explorar Recetas</a></li>
-                <li><a href="" class="nav-link-main">Técnicas e utensilios</a></li>
+                <li><a href="{{ route('tecnicas-utencilios') }}" class="nav-link-main">Técnicas e utensilios</a></li>
                 <li><a href="{{ route('acerca-de') }}" class="nav-link-main">Acerca de</a></li>
                 @auth
                 <li><a href="{{ route('dashboard') }}" class="nav-link-main">Dashboard</a></li>
@@ -27,7 +27,6 @@
                             <i class='bx bxs-user'></i>
                             <a href="#" class="nav-link-main">{{ Auth::user()->name }}</a>
                             <div class="dropdown-content">
-                                <a href="{{ route('dashboard') }}" class="dropdown-link">Dashboard</a>
                                 <a href="{{ route('profile.edit') }}" class="dropdown-link">Perfil</a>
                                 <form method="POST" action="{{ route('logout') }}" style="margin: 0;">
                                     @csrf

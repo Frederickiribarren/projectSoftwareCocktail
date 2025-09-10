@@ -52,6 +52,20 @@
     margin: 0 auto;
 }
 
+.search-bar-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+
+.clear-filters-container {
+    display: flex;
+    align-items: center;
+    margin-left: 0.5rem;
+    margin-bottom: 27px;
+}
+
 .search-bar {
     display: flex;
     width: 100%;
@@ -99,6 +113,11 @@
 .search-button:hover {
     background: var(--hover-color);
     transform: scale(1.05);
+}
+
+.clear-filters-container {
+    display: flex;
+    align-items: center;
 }
 
 /* Filtros avanzados */

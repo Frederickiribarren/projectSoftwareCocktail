@@ -33,12 +33,12 @@
         <div class="footer-section">
             <h3>Enlaces de Interés</h3>
             <ul>
-                <li><a href="">Recetas de Cócteles</a></li>
-                <li><a href="">Biblioteca de Bar</a></li>
+                <li><a href="{{ route('recipes.explore') }}">Recetas de Cócteles</a></li>
                 <li><a href="">Utensilios Profesionales</a></li>
                 <li><a href="">Ingredientes Premium</a></li>
-                <li><a href="">Política de Privacidad</a></li>
-                <li><a href="">Términos y Condiciones</a></li>
+                <li><a href="{{ route('acerca-de') }}">Acerca de Nosotros</a></li>
+                <li><a href="{{ route('politicasPrivacidad') }}">Política de Privacidad</a></li>
+                <li><a href="{{ route('terminosCondiciones') }}">Términos y Condiciones</a></li>
             </ul>
         </div>
 

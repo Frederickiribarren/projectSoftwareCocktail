@@ -37,10 +37,25 @@ Route::get('/explorar-recetas', function () {
     return view('pages.recipes');
 })->name('recipes.explore');
 
+//tecnicas y utensilios
+Route::get('/tecnicas-utencilios', function () {
+    return view('pages.tecnicasUtencilios');
+})->name('tecnicas-utencilios');
+
 // Acerca de
 Route::get('/acerca-de', function () {
     return view('pages.acerca-de');
 })->name('acerca-de');
+
+// Políticas de Privacidad
+Route::get('/politicas-privacidad', function () {
+    return view('pages.politicasPrivacidad');
+})->name('politicasPrivacidad');
+
+//Terminos y Condiciones
+Route::get('/terminos-condiciones', function () {
+    return view('pages.terminosCondiciones');
+})->name('terminosCondiciones');
 
 // Página de prueba de API
 Route::get('/test-api', function () {

@@ -54,6 +54,75 @@
     margin: 10px 0;
 }
 
+.type-list-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px 30px;
+    color: var(--background-dark);
+    text-decoration: none;
+    border-radius: var(--border-radius-lg);
+    font-family: var(--font-navbar-footer);
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-top: 20px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    min-width: 200px;
+}
+
+.type-list-button i {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.type-list-button:hover i {
+    transform: rotate(15deg) scale(1.1);
+}
+
+.type-list-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.2), 
+        transparent
+    );
+    transition: left 0.5s;
+}
+
+.type-list-button:hover::before {
+    left: 100%;
+}
+
+.btn-tecnicas {
+    background: var(--gradient-accent);
+    border: 2px solid var(--accent-color);
+    transform: perspective(1px) translateZ(0);
+}
+
+.btn-tecnicas:hover {
+    background: var(--hover-color);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 15px 35px rgba(255, 215, 0, 0.4);
+    border-color: var(--hover-color);
+}
+
+.btn-tecnicas:active {
+    transform: translateY(-1px) scale(1.02);
+    transition: all 0.1s ease;
+}
+
 /*medida para movil*/
 
 @media (max-width: 768px) {
@@ -64,15 +133,30 @@
 
     .types-preparation .type-img .type-title {
         grid-column: 1 / -1;
-     
+        padding: 20px 0 0 20px;
+    }
+
+    .types-preparation .type-img .type-title .type-title-preparation {
+        font-size: 2rem;
     }
 
     .types-preparation .type-img .type-list {
         grid-column: 1 / -1;
         justify-self: start;
         display: flex;
-        align-items: end;
+        flex-direction: column;
+        align-items: start;
         padding: 0 0 20px 20px;
-        
+    }
+
+    .type-list-button {
+        min-width: 180px;
+        padding: 12px 24px;
+        font-size: 1rem;
+        margin-top: 15px;
+    }
+
+    .type-list-items .type-list-item {
+        font-size: 1.4rem;
     }
 }

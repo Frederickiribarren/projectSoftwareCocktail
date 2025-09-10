@@ -12,12 +12,21 @@
             <section class="search-section">
                 <div class="search-container">
                     <!-- Barra de búsqueda principal -->
-                    <div class="search-bar">
-                        <input type="text" id="searchInput" class="search-input" placeholder="Buscar cócteles por nombre...">
-                        <button class="search-button" id="searchBtn">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
+                     <div class="search-bar-container">
+                        <div class="search-bar">
+                            <input type="text" id="searchInput" class="search-input" placeholder="Buscar cócteles por nombre...">
+                            <button class="search-button" id="searchBtn">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                        <div class="clear-filters-container">
+                            <button class="clear-filters-btn" id="clearFilters">
+                                <i class="fas fa-times"></i>
+                                Limpiar Filtros
+                            </button>
+                        </div>
+                     </div>
+                    
                     
                     <!-- Filtros avanzados -->
                     <div class="filters-container">
@@ -60,11 +69,6 @@
                                 <option value="largo">Más de 10 min</option>
                             </select>
                         </div>
-
-                        <button class="clear-filters-btn" id="clearFilters">
-                            <i class="fas fa-times"></i>
-                            Limpiar Filtros
-                        </button>
                     </div>
                 </div>
             </section>
@@ -74,17 +78,6 @@
                 <div class="results-header">
                     <div class="results-count">
                         <span id="resultsCount">Mostrando todas las recetas</span>
-                    </div>
-                    <div class="sort-options">
-                        <label>Ordenar por:</label>
-                        <select id="sortSelect" class="sort-select">
-                            <option value="name-asc">Nombre A-Z</option>
-                            <option value="name-desc">Nombre Z-A</option>
-                            <option value="difficulty-asc">Dificultad: Fácil primero</option>
-                            <option value="difficulty-desc">Dificultad: Difícil primero</option>
-                            <option value="time-asc">Tiempo: Rápido primero</option>
-                            <option value="time-desc">Tiempo: Lento primero</option>
-                        </select>
                     </div>
                 </div>
 

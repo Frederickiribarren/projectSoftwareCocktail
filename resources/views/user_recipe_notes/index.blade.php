@@ -1,28 +1,6 @@
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cocktail World</title>
-    <!-- Fuentes del sistema -->
-    <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/bartender-and-cocktail">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet">
-    
-    <!-- CSS e iconos -->
-    <link rel="stylesheet" href="{{ asset('css/resetHtml.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
+@extends('layouts.app')
+@section('content')
     <link rel="stylesheet" href="{{ asset('css/usuariorecipenotes.css') }}">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
-</head>
-<body>   
-  @include('components.navbar')
-
     <div class="notes-container">
         <h1 class="notes-title">Mis Notas de Recetas</h1>
         
@@ -32,9 +10,9 @@
             </div>
         @endif
 
-        <a href="{{ route('user_recipe_notes.create') }}" class="create-note-btn">
+        <button id="createNoteBtn" class="btn btn-create">
             <i class='bx bx-plus'></i> Crear Nueva Nota
-        </a>
+        </button>
 
         <table class="notes-table">
             <thead>
@@ -76,9 +54,12 @@
         </table>
     </div>
 
-    @include('components.footer')
-</body>
-</html>
-
+    <script>
+        document.getElementById('createNoteBtn').addEventListener('click', function(event) {
+            // Aquí puedes agregar lógica adicional si es necesario
+            
+        });
+    </script>
+@endsection
 
 

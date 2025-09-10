@@ -53,7 +53,13 @@
                 <li class="type-list-item">Licuados</li>
                 <li class="type-list-item">Doble Colado</li>
             </ol>
+            <a href="{{ route('tecnicas-utencilios') }}" class="type-list-button btn-tecnicas">
+                <i class="fas fa-cocktail"></i>
+                Ver Técnicas
+            </a>
         </div>
+
         </div>
    </section>
+   
 @endsection
