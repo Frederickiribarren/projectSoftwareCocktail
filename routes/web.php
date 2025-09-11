@@ -29,6 +29,13 @@ Route::prefix('api')->group(function () {
     Route::get('/recipes/{id}', [RecipeApiController::class, 'show'])->name('api.recipes.show');
     Route::get('/ingredients', [RecipeApiController::class, 'getIngredients'])->name('api.ingredients');
     Route::get('/glass-types', [RecipeApiController::class, 'getGlassTypes'])->name('api.glass-types');
+    // CRUD Proyectos
+    Route::get('/projects', [App\Http\Controllers\ProjectController::class, 'index']);
+    Route::post('/projects', [App\Http\Controllers\ProjectController::class, 'store']);
+    Route::get('/projects/{id}', [App\Http\Controllers\ProjectController::class, 'show']);
+    Route::put('/projects/{id}', [App\Http\Controllers\ProjectController::class, 'update']);
+    Route::patch('/projects/{id}', [App\Http\Controllers\ProjectController::class, 'update']);
+    Route::delete('/projects/{id}', [App\Http\Controllers\ProjectController::class, 'destroy']);
 });
 
 // Explorar recetas públicas
