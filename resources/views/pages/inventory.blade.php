@@ -170,7 +170,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Estado global del inventario
             let currentIngredients = [];
             let activeFilters = {
                 category: 'all',
@@ -180,7 +179,110 @@
                 search: ''
             };
 
-            // Funciones de filtrado
+            // --- API CRUD ---
+            // Ajusta la URL según tu entorno:
+            // Si usas php artisan serve:
+            const API_URL = 'http://localhost:8000/api/inventory';
+            // Si usas Laragon con dominio personalizado, por ejemplo:
+            // const API_URL = 'http://projectSoftwareCocktail.test/api/inventory';
+
+            // Cargar ingredientes desde la API
+            async function fetchIngredients() {
+                try {
+                    const res = await fetch(API_URL);
+                    if (!res.ok) throw new Error('Error al cargar ingredientes');
+                    const data = await res.json();
+                    currentIngredients = data.map(i => ({
+                        id: i.id,
+                        name: i.name,
+                        category: i.category,
+                        brand: i.brand,
+                        stock: i.stock,
+                        unit: i.unit,
+                        flavors: JSON.parse(i.flavor_profile_tags || '[]'),
+                        isAlcoholic: !!i.is_alcoholic,
+                        status: i.stock === 0 ? 'out' : (i.stock < 200 ? 'low' : 'ok')
+                    }));
+                    updateIngredientList();
+                } catch (err) {
+                    alert(err.message);
+                }
+            }
+
+            // Crear ingrediente
+            async function createIngredient(ingredient) {
+                try {
+                    const res = await fetch(API_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            name: ingredient.name,
+                            category: ingredient.category,
+                            brand: ingredient.brand,
+                            unit: ingredient.unit,
+                            stock: ingredient.stock,
+                            flavors: ingredient.flavors,
+                            is_alcoholic: ingredient.isAlcoholic
+                        })
+                    });
+                    if (res.status === 201) {
+                        await fetchIngredients();
+                        alert('Ingrediente creado exitosamente');
+                    } else {
+                        const error = await res.json();
+                        alert(error.message || 'Error al crear ingrediente');
+                    }
+                } catch (err) {
+                    alert('Error de red');
+                }
+            }
+
+            // Actualizar ingrediente
+            async function updateIngredient(id, ingredient) {
+                try {
+                    const res = await fetch(`${API_URL}/${id}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            name: ingredient.name,
+                            category: ingredient.category,
+                            brand: ingredient.brand,
+                            unit: ingredient.unit,
+                            stock: ingredient.stock,
+                            flavors: ingredient.flavors,
+                            is_alcoholic: ingredient.isAlcoholic
+                        })
+                    });
+                    if (res.ok) {
+                        await fetchIngredients();
+                        alert('Ingrediente actualizado');
+                    } else {
+                        const error = await res.json();
+                        alert(error.message || 'Error al actualizar');
+                    }
+                } catch (err) {
+                    alert('Error de red');
+                }
+            }
+
+            // Eliminar ingrediente
+            async function deleteIngredient(id) {
+                if (!confirm('¿Eliminar este ingrediente?')) return;
+                try {
+                    const res = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+                    if (res.status === 204) {
+                        await fetchIngredients();
+                        alert('Ingrediente eliminado');
+                    } else {
+                        const error = await res.json();
+                        alert(error.message || 'Error al eliminar');
+                    }
+                } catch (err) {
+                    alert('Error de red');
+                }
+            }
+
+            // --- UI y eventos ---
             function filterIngredients() {
                 return currentIngredients.filter(ingredient => {
                     const matchesCategory = activeFilters.category === 'all' || 
@@ -212,17 +314,14 @@
                 const header = list.querySelector('.ingredient-header');
                 list.innerHTML = '';
                 list.appendChild(header);
-
                 filteredIngredients.forEach(ingredient => {
                     const template = document.getElementById('ingredient-template');
                     const clone = document.importNode(template.content, true);
-                    
                     clone.querySelector('.ingredient-name').textContent = ingredient.name;
                     clone.querySelector('.ingredient-category').textContent = ingredient.category;
                     clone.querySelector('.ingredient-brand').textContent = ingredient.brand;
                     clone.querySelector('.quantity-input').value = ingredient.stock;
                     clone.querySelector('.unit').textContent = getUnitAbbreviation(ingredient.unit);
-
                     const flavorTags = clone.querySelector('.flavor-tags');
                     ingredient.flavors.forEach(flavor => {
                         const tag = document.createElement('span');
@@ -230,9 +329,12 @@
                         tag.textContent = flavor;
                         flavorTags.appendChild(tag);
                     });
-
                     const stockStatus = clone.querySelector('.stock-status');
                     updateStockStatus(stockStatus, ingredient.stock);
+
+                    // Acciones CRUD
+                    clone.querySelector('.btn-icon[title="Eliminar"]').onclick = () => deleteIngredient(ingredient.id);
+                    clone.querySelector('.btn-icon[title="Editar"]').onclick = () => openEditModal(ingredient);
 
                     // Añadir el ingrediente al DOM
                     list.appendChild(clone);
@@ -304,19 +406,30 @@
             const modal = document.getElementById('ingredientModal');
             const addIngredientBtn = document.getElementById('addIngredientBtn');
             const closeModalBtn = modal.querySelector('.close-modal');
-            
+            let editingIngredientId = null;
             function openModal() {
                 modal.classList.add('active');
-            }
-
-            function closeModal() {
-                modal.classList.remove('active');
+                editingIngredientId = null;
                 document.getElementById('ingredientForm').reset();
             }
-
+            function openEditModal(ingredient) {
+                modal.classList.add('active');
+                editingIngredientId = ingredient.id;
+                document.getElementById('ingredientName').value = ingredient.name;
+                document.getElementById('ingredientCategory').value = ingredient.category;
+                document.getElementById('ingredientBrand').value = ingredient.brand;
+                document.getElementById('ingredientUnit').value = ingredient.unit;
+                document.getElementById('ingredientStock').value = ingredient.stock;
+                document.getElementById('ingredientFlavors').value = ingredient.flavors.join(', ');
+                document.getElementById('ingredientAlcoholic').checked = ingredient.isAlcoholic;
+            }
+            function closeModal() {
+                modal.classList.remove('active');
+                editingIngredientId = null;
+                document.getElementById('ingredientForm').reset();
+            }
             addIngredientBtn.addEventListener('click', openModal);
             closeModalBtn.addEventListener('click', closeModal);
-
             document.getElementById('ingredientForm').addEventListener('submit', function(e) {
                 e.preventDefault();
                 const unit = document.getElementById('ingredientUnit').value;
@@ -330,38 +443,15 @@
                     isAlcoholic: document.getElementById('ingredientAlcoholic').checked,
                     status: 'ok'
                 };
-
-                currentIngredients.push(newIngredient);
-                updateIngredientList();
+                if (editingIngredientId) {
+                    updateIngredient(editingIngredientId, newIngredient);
+                } else {
+                    createIngredient(newIngredient);
+                }
                 closeModal();
             });
-
-            // Inicialización
-            // Aquí normalmente cargarías los ingredientes desde el backend
-            currentIngredients = [
-                {
-                    name: "Gin Hendrick's",
-                    category: "Spirits",
-                    brand: "Hendrick's",
-                    stock: 2,
-                    unit: 'bottle',
-                    flavors: ["Pepino", "Rosa"],
-                    isAlcoholic: true,
-                    status: 'ok'
-                },
-                {
-                    name: "Tónica Fever-Tree",
-                    category: "Mixers",
-                    brand: "Fever-Tree",
-                    stock: 6,
-                    unit: 'unit',
-                    flavors: ["Cítrico", "Quinina"],
-                    isAlcoholic: false,
-                    status: 'low'
-                }
-            ];
-
-            updateIngredientList();
+            // Inicialización: cargar ingredientes desde la API
+            fetchIngredients();
         });
     </script>
 @endsection
