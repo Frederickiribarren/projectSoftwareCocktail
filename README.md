@@ -208,6 +208,24 @@ projectSoftwareCocktail/
 - **style:** Cambios de estilo/CSS
 - **docs:** Actualización de documentación
 
+### Integracion Frontend
+- La página inventory.blade.php fue modificada para consumir la API CRUD usando fetch/AJAX.
+- El usuario puede crear, editar y eliminar ingredientes desde el frontend.
+- Se muestran alertas de éxito y error según la respuesta de la API.
+
+### Validacion y Respuestas
+- Todos los campos son validados en el backend y frontend.
+- Los controladores devuelven los códigos de respuesta requeridos (201, 200, 404, 204).
+- Si no hay ingredientes, la API retorna un arreglo vacío.
+
+### Pruebas y Evidencia
+- Se realizaron pruebas de las operaciones CRUD desde el frontend.
+- Se tomaron capturas de pantalla de cada operación exitosa y de los mensajes de error.
+- Ejemplo de código JS para consumir la API:
+  const API_URL = 'http://localhost:8000/api/inventory';
+  // fetchIngredients(), createIngredient(), updateIngredient(), deleteIngredient()
+
+  
 ## 📄 Licencia
 
 Este proyecto está bajo la Licencia MIT. Consulta el archivo `LICENSE` para más detalles.
